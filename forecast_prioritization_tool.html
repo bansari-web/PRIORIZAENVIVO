@@ -1,0 +1,354 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.app { padding: 1.5rem 0; }
+.header { margin-bottom: 1.5rem; }
+.header h1 { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.header p { font-size: 14px; color: var(--color-text-secondary); }
+.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.upload-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+.upload-card .label { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px; }
+.upload-card .desc { font-size: 12px; color: var(--color-text-tertiary); margin-bottom: 12px; line-height: 1.5; }
+.drop-zone { border: 1px dashed var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 20px; text-align: center; cursor: pointer; transition: background 0.15s; }
+.drop-zone:hover { background: var(--color-background-secondary); }
+.drop-zone.active { border-color: #1D9E75; background: #E1F5EE; }
+.drop-zone.loaded { border-color: #1D9E75; background: #E1F5EE; border-style: solid; }
+.drop-zone i { font-size: 24px; color: var(--color-text-tertiary); display: block; margin-bottom: 6px; }
+.drop-zone.loaded i { color: #0F6E56; }
+.drop-zone span { font-size: 13px; color: var(--color-text-secondary); }
+.drop-zone.loaded span { color: #0F6E56; font-weight: 500; }
+.analyze-btn { width: 100%; padding: 10px; font-size: 14px; font-weight: 500; border-radius: var(--border-radius-md); border: none; background: var(--color-text-primary); color: var(--color-background-primary); cursor: pointer; margin-bottom: 1.5rem; transition: opacity 0.15s; }
+.analyze-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.analyze-btn:not(:disabled):hover { opacity: 0.85; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+.stat { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
+.stat .slabel { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.stat .sval { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.stat .ssub { font-size: 11px; color: var(--color-text-tertiary); margin-top: 2px; }
+.filters { display: flex; gap: 10px; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+.filters select, .filters input { font-size: 13px; padding: 6px 10px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); }
+.filters label { font-size: 13px; color: var(--color-text-secondary); }
+.section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
+.results-table-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 500; color: var(--color-text-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+td { padding: 9px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); vertical-align: top; word-break: break-word; }
+tr:hover td { background: var(--color-background-secondary); }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 20px; white-space: nowrap; }
+.badge-ok { background: #E1F5EE; color: #085041; }
+.badge-partial { background: #FAEEDA; color: #633806; }
+.badge-no { background: #FCEBEB; color: #501313; }
+.badge-missing { background: #F1EFE8; color: #444441; }
+.progress-bar { height: 6px; background: var(--color-background-secondary); border-radius: 3px; margin-top: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+.empty { text-align: center; padding: 3rem; color: var(--color-text-tertiary); font-size: 14px; }
+.empty i { font-size: 32px; display: block; margin-bottom: 8px; }
+.product-list { font-size: 11px; color: var(--color-text-secondary); line-height: 1.6; }
+.missing-tag { color: #993C1D; font-weight: 500; }
+.col-bundle { width: 200px; }
+.col-boxes { width: 70px; }
+.col-status { width: 100px; }
+.col-pct { width: 90px; }
+.col-products { width: auto; }
+.col-weight { width: 80px; }
+</style>
+
+<div class="app">
+  <h2 class="sr-only">Herramienta de priorización de plan de predicción por stock disponible</h2>
+  <div class="header">
+    <h1><i class="ti ti-package" style="font-size:20px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>Priorizador de plan de predicción</h1>
+    <p>Sube los dos ficheros para calcular qué proyectos puedes fabricar ahora mismo con el stock disponible</p>
+  </div>
+
+  <div class="upload-grid">
+    <div class="upload-card">
+      <div class="label"><i class="ti ti-box" style="font-size:13px;vertical-align:-1px;margin-right:4px" aria-hidden="true"></i>Plan de cajas pendientes</div>
+      <div class="desc">Columnas usadas: WMS Bundle Code, products, boxes, totalWeight</div>
+      <div class="drop-zone" id="dz1" onclick="document.getElementById('f1').click()">
+        <i class="ti ti-upload" id="i1"></i>
+        <span id="s1">Seleccionar o arrastrar .xlsx</span>
+      </div>
+      <input type="file" id="f1" accept=".xlsx" style="display:none">
+    </div>
+    <div class="upload-card">
+      <div class="label"><i class="ti ti-database" style="font-size:13px;vertical-align:-1px;margin-right:4px" aria-hidden="true"></i>Inventario disponible</div>
+      <div class="desc">Columnas usadas: itemCode, 2026-05-11_totalStockavailable</div>
+      <div class="drop-zone" id="dz2" onclick="document.getElementById('f2').click()">
+        <i class="ti ti-upload" id="i2"></i>
+        <span id="s2">Seleccionar o arrastrar .xlsx</span>
+      </div>
+      <input type="file" id="f2" accept=".xlsx" style="display:none">
+    </div>
+  </div>
+
+  <button class="analyze-btn" id="analyzeBtn" disabled onclick="runAnalysis()">
+    <i class="ti ti-search" style="font-size:14px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>Analizar qué puedo fabricar
+  </button>
+
+  <div id="results" style="display:none">
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="filters">
+      <label>Filtrar por estado:</label>
+      <select id="filterStatus" onchange="renderTable()">
+        <option value="">Todos</option>
+        <option value="ok">Fabricable al 100%</option>
+        <option value="partial">Stock parcial</option>
+        <option value="no">Sin stock</option>
+        <option value="missing">Sin datos inventario</option>
+      </select>
+      <label style="margin-left:8px">Ordenar por:</label>
+      <select id="sortBy" onchange="renderTable()">
+        <option value="boxes_desc">Más cajas primero</option>
+        <option value="boxes_asc">Menos cajas primero</option>
+        <option value="pct_desc">Mayor % stock primero</option>
+        <option value="pct_asc">Menor % stock primero</option>
+        <option value="weight_desc">Más peso primero</option>
+      </select>
+      <label style="margin-left:8px">Mín. cajas:</label>
+      <input type="number" id="minBoxes" value="1" min="1" style="width:70px" onchange="renderTable()">
+    </div>
+
+    <div class="section-title" id="tableTitle"></div>
+    <div class="results-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-bundle">WMS Bundle Code</th>
+            <th class="col-boxes">Cajas</th>
+            <th class="col-weight">Peso total (kg)</th>
+            <th class="col-status">Estado</th>
+            <th class="col-pct">% fabricable</th>
+            <th class="col-products">Productos</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="emptyState" class="empty" style="display:none">
+    <i class="ti ti-mood-empty"></i>
+    No hay proyectos que coincidan con los filtros
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+let bundleData = null, inventoryData = null, analysisResults = null;
+
+function setupDrop(dzId, inputId, iId, sId, varName) {
+  const dz = document.getElementById(dzId);
+  const input = document.getElementById(inputId);
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('active'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('active'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault(); dz.classList.remove('active');
+    const file = e.dataTransfer.files[0];
+    if(file) processFile(file, iId, sId, varName);
+  });
+  input.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if(file) processFile(file, iId, sId, varName);
+  });
+}
+
+function processFile(file, iId, sId, varName) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const wb = XLSX.read(e.target.result, {type:'array'});
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const data = XLSX.utils.sheet_to_json(ws, {defval:''});
+      if(varName === 'bundle') bundleData = data;
+      else inventoryData = data;
+      document.getElementById(iId).className = 'ti ti-check';
+      document.getElementById(sId).textContent = file.name + ' (' + data.length + ' filas)';
+      document.getElementById(dzId(varName)).classList.add('loaded');
+      checkReady();
+    } catch(err) {
+      alert('Error leyendo el archivo: ' + err.message);
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function dzId(v) { return v === 'bundle' ? 'dz1' : 'dz2'; }
+
+setupDrop('dz1','f1','i1','s1','bundle');
+setupDrop('dz2','f2','i2','s2','inventory');
+
+function checkReady() {
+  document.getElementById('analyzeBtn').disabled = !(bundleData && inventoryData);
+}
+
+function parseProducts(prodStr) {
+  if(!prodStr) return [];
+  const results = [];
+  const re = /([^,(]+)\(([^)]+)kg\)/g;
+  let m;
+  while((m = re.exec(prodStr)) !== null) {
+    const code = m[1].trim();
+    const weight = parseFloat(m[2]);
+    if(code) results.push({ code, weight });
+  }
+  if(results.length === 0) {
+    const parts = String(prodStr).split(',');
+    parts.forEach(p => {
+      const pm = p.trim().match(/^([^\(]+)/);
+      if(pm) results.push({ code: pm[1].trim(), weight: null });
+    });
+  }
+  return results;
+}
+
+function findStockColName(row) {
+  const keys = Object.keys(row);
+  let best = null;
+  keys.forEach(k => { if(k.includes('totalStockavailable') || k.includes('totalStock')) best = k; });
+  if(!best) {
+    const dateKey = keys.find(k => /\d{4}-\d{2}-\d{2}_total/.test(k));
+    if(dateKey) best = dateKey;
+  }
+  return best;
+}
+
+function runAnalysis() {
+  const inventoryMap = {};
+  let stockCol = null;
+  inventoryData.forEach(row => {
+    if(!stockCol) stockCol = findStockColName(row);
+    const code = (row['itemCode'] || row['ItemCode'] || row['item_code'] || '').trim();
+    if(code) {
+      const stock = parseFloat(row[stockCol] || 0) || 0;
+      if(!inventoryMap[code] || stock > inventoryMap[code]) {
+        inventoryMap[code] = stock;
+      }
+    }
+  });
+
+  analysisResults = [];
+  bundleData.forEach(row => {
+    const bundle = (row['WMS Bundle Code'] || row['WMS_Bundle_Code'] || row['wms bundle code'] || '').trim();
+    const boxes = parseInt(row['boxes'] || row['Boxes'] || 0) || 0;
+    const weight = parseFloat(row['totalWeight'] || row['total_weight'] || row['TotalWeight'] || 0) || 0;
+    const prodStr = row['products'] || row['Products'] || '';
+    if(!bundle || boxes <= 0) return;
+    const products = parseProducts(String(prodStr));
+    let minPct = Infinity;
+    let missingData = false;
+    const productDetails = products.map(p => {
+      const stock = inventoryMap[p.code];
+      if(stock === undefined) { missingData = true; return { ...p, stock: null, available: null, pct: null }; }
+      const needed = p.weight !== null ? p.weight * boxes : 1;
+      const pct = needed > 0 ? Math.min(100, (stock / needed) * 100) : (stock > 0 ? 100 : 0);
+      if(pct < minPct) minPct = pct;
+      return { ...p, stock, needed, pct };
+    });
+    let status, pct;
+    if(products.length === 0) { status = 'missing'; pct = 0; }
+    else if(missingData && minPct === Infinity) { status = 'missing'; pct = 0; }
+    else {
+      pct = minPct === Infinity ? 0 : Math.round(Math.min(100, minPct));
+      if(pct >= 100) status = 'ok';
+      else if(pct > 0) status = 'partial';
+      else status = 'no';
+      if(missingData) status = status === 'ok' ? 'missing' : status;
+    }
+    analysisResults.push({ bundle, boxes, weight, products: productDetails, status, pct, missingData });
+  });
+
+  document.getElementById('results').style.display = 'block';
+  renderStats();
+  renderTable();
+}
+
+function renderStats() {
+  const ok = analysisResults.filter(r => r.status === 'ok');
+  const partial = analysisResults.filter(r => r.status === 'partial');
+  const no = analysisResults.filter(r => r.status === 'no');
+  const totalBoxesOk = ok.reduce((a,r) => a+r.boxes, 0);
+  const totalBoxesPartial = partial.reduce((a,r) => a+r.boxes, 0);
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat">
+      <div class="slabel">Fabricables al 100%</div>
+      <div class="sval" style="color:#0F6E56">${ok.length}</div>
+      <div class="ssub">${totalBoxesOk.toLocaleString()} cajas · stock completo</div>
+    </div>
+    <div class="stat">
+      <div class="slabel">Stock parcial</div>
+      <div class="sval" style="color:#BA7517">${partial.length}</div>
+      <div class="ssub">${totalBoxesPartial.toLocaleString()} cajas afectadas</div>
+    </div>
+    <div class="stat">
+      <div class="slabel">Sin stock</div>
+      <div class="sval" style="color:#A32D2D">${no.length}</div>
+      <div class="ssub">No fabricables hoy</div>
+    </div>
+    <div class="stat">
+      <div class="slabel">Total proyectos</div>
+      <div class="sval">${analysisResults.length}</div>
+      <div class="ssub">${analysisResults.reduce((a,r)=>a+r.boxes,0).toLocaleString()} cajas totales</div>
+    </div>
+  `;
+}
+
+function renderTable() {
+  const filterStatus = document.getElementById('filterStatus').value;
+  const sortBy = document.getElementById('sortBy').value;
+  const minBoxes = parseInt(document.getElementById('minBoxes').value) || 1;
+  let data = analysisResults.filter(r => {
+    if(filterStatus && r.status !== filterStatus) return false;
+    if(r.boxes < minBoxes) return false;
+    return true;
+  });
+  data.sort((a,b) => {
+    if(sortBy === 'boxes_desc') return b.boxes - a.boxes;
+    if(sortBy === 'boxes_asc') return a.boxes - b.boxes;
+    if(sortBy === 'pct_desc') return b.pct - a.pct;
+    if(sortBy === 'pct_asc') return a.pct - b.pct;
+    if(sortBy === 'weight_desc') return b.weight - a.weight;
+    return 0;
+  });
+
+  document.getElementById('tableTitle').textContent = data.length + ' proyectos mostrados';
+  const tbody = document.getElementById('tableBody');
+  const emptyState = document.getElementById('emptyState');
+  if(data.length === 0) {
+    tbody.innerHTML = '';
+    emptyState.style.display = 'block';
+    document.querySelector('.results-table-wrap').style.display = 'none';
+    return;
+  }
+  emptyState.style.display = 'none';
+  document.querySelector('.results-table-wrap').style.display = 'block';
+
+  tbody.innerHTML = data.map(r => {
+    let badge = '';
+    if(r.status === 'ok') badge = '<span class="badge badge-ok"><i class="ti ti-check" aria-hidden="true"></i>Fabricable</span>';
+    else if(r.status === 'partial') badge = '<span class="badge badge-partial"><i class="ti ti-alert-triangle" aria-hidden="true"></i>Parcial</span>';
+    else if(r.status === 'no') badge = '<span class="badge badge-no"><i class="ti ti-x" aria-hidden="true"></i>Sin stock</span>';
+    else badge = '<span class="badge badge-missing"><i class="ti ti-question-mark" aria-hidden="true"></i>Sin datos</span>';
+
+    const barColor = r.status === 'ok' ? '#1D9E75' : r.status === 'partial' ? '#BA7517' : '#E24B4A';
+    const pctDisplay = r.pct !== null ? r.pct + '%' : '?';
+    const pctBar = r.pct !== null ? `<div class="progress-bar"><div class="progress-fill" style="width:${r.pct}%;background:${barColor}"></div></div>` : '';
+
+    const prodHtml = r.products.slice(0, 8).map(p => {
+      const stockStr = p.stock === null ? '<span class="missing-tag">sin datos</span>' : (p.stock > 0 ? p.stock.toFixed(1) + ' u.' : '<span class="missing-tag">0 u.</span>');
+      const neededStr = p.needed !== undefined && p.needed !== null ? ' / necesito ' + p.needed.toFixed(1) : '';
+      return `<div><b>${p.code}</b> — stock: ${stockStr}${neededStr}</div>`;
+    }).join('') + (r.products.length > 8 ? `<div style="color:var(--color-text-tertiary)">…y ${r.products.length-8} más</div>` : '');
+
+    return `<tr>
+      <td class="col-bundle" style="font-size:12px;font-weight:500;word-break:break-all">${r.bundle}</td>
+      <td class="col-boxes" style="font-weight:500">${r.boxes.toLocaleString()}</td>
+      <td class="col-weight">${r.weight.toFixed(1)}</td>
+      <td class="col-status">${badge}</td>
+      <td class="col-pct">${pctDisplay}${pctBar}</td>
+      <td class="col-products"><div class="product-list">${prodHtml}</div></td>
+    </tr>`;
+  }).join('');
+}
+</script>
