@@ -777,7 +777,7 @@ function renderTable() {
       if (p.stock === null) {
         stockHtml = '<span class="prod-nodata">sin datos en inventario</span>';
       } else if (p.pct !== null && p.pct >= 100) {
-        stockHtml = `<span class="prod-ok">✓ ${p.stock.toFixed(1)} u. disponibles</span>`;
+        stockHtml = `<span class="prod-ok">✓ necesito ${p.needed.toFixed(1)} de ${p.stock.toFixed(1)} disponibles</span>`;
       } else if (p.pct !== null && p.pct > 0) {
         stockHtml = `<span class="prod-warn">⚠ ${p.stock.toFixed(1)} / ${p.needed.toFixed(1)} u. necesarias</span>`;
       } else {
