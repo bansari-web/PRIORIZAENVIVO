@@ -81,7 +81,7 @@
   }
 
   .main {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 32px 24px;
   }
@@ -95,7 +95,6 @@
     margin-bottom: 10px;
   }
 
-  /* Upload area */
   .upload-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -127,14 +126,10 @@
     flex-shrink: 0;
   }
 
-  .icon-blue { background: #EBF4FE; color: #185FA5; }
-  .icon-purple { background: #EEEDFE; color: #534AB7; }
+  .icon-blue { background: #EBF4FE; }
+  .icon-purple { background: #EEEDFE; }
 
-  .upload-card-header strong {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-  }
+  .upload-card-header strong { font-size: 13px; font-weight: 600; color: var(--text); }
 
   .upload-card-desc {
     font-size: 12px;
@@ -155,29 +150,12 @@
 
   .drop-zone:hover { border-color: var(--green); background: var(--green-light); }
   .drop-zone.dragging { border-color: var(--green); background: var(--green-light); }
+  .drop-zone.loaded { border-color: var(--green); border-style: solid; background: var(--green-light); }
 
-  .drop-zone.loaded {
-    border-color: var(--green);
-    border-style: solid;
-    background: var(--green-light);
-  }
-
-  .drop-zone-icon {
-    font-size: 22px;
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  .drop-zone-text {
-    font-size: 12px;
-    color: var(--text-secondary);
-    display: block;
-  }
-
-  .drop-zone.loaded .drop-zone-icon { filter: none; }
+  .drop-zone-icon { font-size: 22px; margin-bottom: 6px; display: block; }
+  .drop-zone-text { font-size: 12px; color: var(--text-secondary); display: block; }
   .drop-zone.loaded .drop-zone-text { color: var(--green-dark); font-weight: 500; }
 
-  /* Button */
   .btn-analyze {
     width: 100%;
     padding: 12px;
@@ -190,13 +168,11 @@
     cursor: pointer;
     transition: opacity 0.15s;
     margin-bottom: 28px;
-    letter-spacing: -0.01em;
   }
 
   .btn-analyze:disabled { opacity: 0.25; cursor: not-allowed; }
   .btn-analyze:not(:disabled):hover { opacity: 0.82; }
 
-  /* Stats */
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -213,27 +189,10 @@
     padding: 16px;
   }
 
-  .stat-card .s-label {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-bottom: 4px;
-    font-weight: 500;
-  }
+  .stat-card .s-label { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; font-weight: 500; }
+  .stat-card .s-value { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; margin-bottom: 4px; }
+  .stat-card .s-sub { font-size: 11px; color: var(--text-tertiary); }
 
-  .stat-card .s-value {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .stat-card .s-sub {
-    font-size: 11px;
-    color: var(--text-tertiary);
-  }
-
-  /* Filters */
   .filters-bar {
     display: flex;
     gap: 10px;
@@ -246,18 +205,8 @@
     padding: 12px 16px;
   }
 
-  .filter-group {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .filter-group label {
-    font-size: 12px;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    font-weight: 500;
-  }
+  .filter-group { display: flex; align-items: center; gap: 6px; }
+  .filter-group label { font-size: 12px; color: var(--text-secondary); white-space: nowrap; font-weight: 500; }
 
   .filters-bar select,
   .filters-bar input[type="number"] {
@@ -270,13 +219,6 @@
     font-family: inherit;
   }
 
-  .filters-bar select:focus,
-  .filters-bar input:focus {
-    outline: 2px solid var(--green);
-    outline-offset: 1px;
-  }
-
-  /* Table */
   .table-header {
     display: flex;
     align-items: center;
@@ -284,10 +226,7 @@
     margin-bottom: 10px;
   }
 
-  .table-header span {
-    font-size: 12px;
-    color: var(--text-secondary);
-  }
+  .table-header span { font-size: 12px; color: var(--text-secondary); }
 
   .table-wrap {
     background: var(--bg-card);
@@ -298,11 +237,7 @@
 
   .table-scroll { overflow-x: auto; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
   thead th {
     text-align: left;
@@ -329,18 +264,12 @@
   .bundle-code {
     font-family: 'SF Mono', 'Fira Mono', monospace;
     font-size: 11px;
-    color: var(--text);
     word-break: break-all;
     max-width: 180px;
   }
 
-  .boxes-num {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text);
-  }
+  .boxes-num { font-weight: 700; font-size: 15px; }
 
-  /* Badges */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -357,55 +286,61 @@
   .badge-no { background: var(--red-light); color: var(--red-dark); }
   .badge-missing { background: var(--gray-light); color: var(--gray-dark); }
 
-  /* Progress bar */
   .pct-wrap { min-width: 80px; }
-  .pct-label {
-    font-size: 12px;
+  .pct-label { font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .progress-bar { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 3px; }
+
+  /* Products */
+  .prod-list { font-size: 11px; line-height: 1.9; min-width: 300px; }
+
+  .prod-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .prod-code {
+    font-family: 'SF Mono', 'Fira Mono', monospace;
     font-weight: 600;
+    font-size: 10.5px;
+    white-space: nowrap;
     color: var(--text);
-    margin-bottom: 3px;
-  }
-  .progress-bar {
-    height: 5px;
-    background: var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.4s ease;
   }
 
-  /* Product list */
-  .prod-list { font-size: 11px; line-height: 1.7; max-width: 340px; }
-  .prod-item { display: flex; gap: 6px; align-items: baseline; }
-  .prod-code { font-family: monospace; font-weight: 600; color: var(--text); font-size: 10.5px; flex-shrink: 0; }
-  .prod-ok { color: var(--green-dark); }
+  .prod-ok   { color: var(--green-dark); }
   .prod-warn { color: var(--amber-dark); font-weight: 600; }
-  .prod-missing { color: var(--red-dark); font-weight: 600; }
+  .prod-no   { color: var(--red-dark);   font-weight: 600; }
   .prod-nodata { color: var(--gray); font-style: italic; }
-  .prod-more { color: var(--text-tertiary); font-size: 10px; margin-top: 2px; }
 
-  /* Empty */
+  .prod-extra { display: none; }
+  .prod-extra.open { display: block; }
+
+  .btn-more {
+    margin-top: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 3px 10px;
+    cursor: pointer;
+    display: inline-block;
+    transition: background 0.15s;
+  }
+
+  .btn-more:hover { background: var(--border); }
+
   .empty-state {
     text-align: center;
     padding: 48px 24px;
     color: var(--text-tertiary);
   }
 
-  .empty-state .empty-icon { font-size: 36px; display: block; margin-bottom: 10px; }
-  .empty-state p { font-size: 14px; }
+  .empty-icon { font-size: 36px; display: block; margin-bottom: 10px; }
 
-  /* Loading */
-  .loading {
-    text-align: center;
-    padding: 32px;
-    color: var(--text-secondary);
-    font-size: 13px;
-  }
-
-  /* Export button */
   .btn-export {
     font-size: 12px;
     font-weight: 500;
@@ -419,7 +354,6 @@
   }
 
   .btn-export:hover { background: var(--bg-secondary); }
-
   .hidden { display: none !important; }
 </style>
 </head>
@@ -427,16 +361,13 @@
 
 <div class="topbar">
   <div class="topbar-logo">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 7H4C2.9 7 2 7.9 2 9v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 12H4V9h16v10zM4 3h16v2H4z"/>
-    </svg>
+    <svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 12H4V9h16v10zM4 3h16v2H4z"/></svg>
   </div>
   <h1>Priorizador de Plan de Predicción <span>PRIORIZAENVIVO</span></h1>
 </div>
 
 <div class="main">
 
-  <!-- Upload -->
   <div class="section-label">1 — Sube los ficheros</div>
   <div class="upload-grid">
     <div class="upload-card">
@@ -452,7 +383,6 @@
       </div>
       <input type="file" id="f1" accept=".xlsx,.xls" style="display:none" onchange="handleFileInput(this,'bundle')">
     </div>
-
     <div class="upload-card">
       <div class="upload-card-header">
         <div class="icon icon-purple">🗄️</div>
@@ -468,15 +398,12 @@
     </div>
   </div>
 
-  <!-- Analyze -->
   <div class="section-label">2 — Analiza</div>
   <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">
     🔍 Calcular qué puedo fabricar ahora mismo
   </button>
 
-  <!-- Results -->
   <div id="resultsSection" class="hidden">
-
     <div class="section-label">3 — Resultados</div>
     <div class="stats-grid" id="statsGrid"></div>
 
@@ -534,32 +461,23 @@
         </table>
       </div>
     </div>
-
   </div>
 </div>
 
 <script>
-let bundleData = null;
-let inventoryData = null;
-let analysisResults = [];
+let bundleData = null, inventoryData = null, analysisResults = [];
 
-// ── Drag & drop ──────────────────────────────────────────────────────
-function handleDragOver(e, dzId) {
-  e.preventDefault();
-  document.getElementById(dzId).classList.add('dragging');
-}
-function handleDragLeave(dzId) {
-  document.getElementById(dzId).classList.remove('dragging');
-}
+function handleDragOver(e, id) { e.preventDefault(); document.getElementById(id).classList.add('dragging'); }
+function handleDragLeave(id) { document.getElementById(id).classList.remove('dragging'); }
 function handleDrop(e, dzId, type) {
   e.preventDefault();
   document.getElementById(dzId).classList.remove('dragging');
-  const file = e.dataTransfer.files[0];
-  if (file) processFile(file, type);
+  const f = e.dataTransfer.files[0];
+  if (f) processFile(f, type);
 }
 function handleFileInput(input, type) {
-  const file = input.files[0];
-  if (file) processFile(file, type);
+  const f = input.files[0];
+  if (f) processFile(f, type);
 }
 
 function processFile(file, type) {
@@ -567,20 +485,11 @@ function processFile(file, type) {
   reader.onload = function(e) {
     try {
       const wb = XLSX.read(e.target.result, { type: 'array' });
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const data = XLSX.utils.sheet_to_json(ws, { defval: '' });
-
-      if (type === 'bundle') {
-        bundleData = data;
-        setLoaded('dz1', 'icon1', 'text1', file.name, data.length);
-      } else {
-        inventoryData = data;
-        setLoaded('dz2', 'icon2', 'text2', file.name, data.length);
-      }
+      const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval: '' });
+      if (type === 'bundle') { bundleData = data; setLoaded('dz1','icon1','text1', file.name, data.length); }
+      else { inventoryData = data; setLoaded('dz2','icon2','text2', file.name, data.length); }
       checkReady();
-    } catch(err) {
-      alert('Error leyendo el archivo: ' + err.message);
-    }
+    } catch(err) { alert('Error leyendo el archivo: ' + err.message); }
   };
   reader.readAsArrayBuffer(file);
 }
@@ -595,11 +504,10 @@ function checkReady() {
   document.getElementById('analyzeBtn').disabled = !(bundleData && inventoryData);
 }
 
-// ── Parsing ──────────────────────────────────────────────────────────
 function parseProducts(prodStr) {
   const str = String(prodStr || '');
   const results = [];
-  const re = /([^,()\s][^,()\n]*?)\s*\(([0-9.]+)\s*kg\)/gi;
+  const re = /([^,()\n]+?)\s*\(([0-9.]+)\s*kg\)/gi;
   let m;
   while ((m = re.exec(str)) !== null) {
     const code = m[1].trim();
@@ -615,58 +523,42 @@ function parseProducts(prodStr) {
   return results;
 }
 
-function findStockColumn(sampleRow) {
-  const keys = Object.keys(sampleRow);
-  // Prefer today's date column first
+function findStockColumn(row) {
+  const keys = Object.keys(row);
   const today = new Date().toISOString().slice(0, 10);
-  const todayKey = keys.find(k => k.startsWith(today) && k.includes('totalStockavailable'));
-  if (todayKey) return todayKey;
-  // Fall back to any _totalStockavailable
-  return keys.find(k => k.includes('totalStockavailable') || k.includes('totalStock')) || null;
+  return keys.find(k => k.startsWith(today) && k.includes('totalStockavailable'))
+      || keys.find(k => k.includes('totalStockavailable'))
+      || keys.find(k => k.includes('totalStock'))
+      || null;
 }
 
-// ── Analysis ─────────────────────────────────────────────────────────
 function runAnalysis() {
-  // Build inventory map: itemCode → max stock across warehouses
   const inventoryMap = {};
   let stockCol = null;
   inventoryData.forEach(row => {
     if (!stockCol) stockCol = findStockColumn(row);
-    const code = String(row['itemCode'] || row['ItemCode'] || row['item_code'] || '').trim();
+    const code = String(row['itemCode'] || row['ItemCode'] || '').trim();
     if (!code) return;
     const stock = parseFloat(row[stockCol] || 0) || 0;
-    // Aggregate: sum stock across warehouses for same itemCode
     inventoryMap[code] = (inventoryMap[code] || 0) + stock;
   });
 
   analysisResults = [];
-
   bundleData.forEach(row => {
     const bundle = String(row['WMS Bundle Code'] || row['WMS_Bundle_Code'] || '').trim();
-    const boxes = parseInt(row['boxes'] || row['Boxes'] || 0) || 0;
+    const boxes  = parseInt(row['boxes'] || row['Boxes'] || 0) || 0;
     const weight = parseFloat(row['totalWeight'] || row['total_weight'] || row['TotalWeight'] || 0) || 0;
     const prodStr = row['products'] || row['Products'] || '';
-
     if (!bundle || boxes <= 0) return;
 
     const products = parseProducts(String(prodStr));
-    let minPct = Infinity;
-    let hasNoData = false;
+    let minPct = Infinity, hasNoData = false;
 
     const productDetails = products.map(p => {
       const stock = inventoryMap[p.code];
-      if (stock === undefined) {
-        hasNoData = true;
-        return { ...p, stock: null, needed: null, pct: null };
-      }
-      let needed, pct;
-      if (p.weight !== null) {
-        needed = p.weight * boxes;
-        pct = needed > 0 ? Math.min(100, (stock / needed) * 100) : (stock > 0 ? 100 : 0);
-      } else {
-        needed = boxes;
-        pct = needed > 0 ? Math.min(100, (stock / needed) * 100) : 0;
-      }
+      if (stock === undefined) { hasNoData = true; return { ...p, stock: null, needed: null, pct: null }; }
+      const needed = p.weight !== null ? p.weight * boxes : boxes;
+      const pct = needed > 0 ? Math.min(100, (stock / needed) * 100) : (stock > 0 ? 100 : 0);
       if (pct < minPct) minPct = pct;
       return { ...p, stock, needed, pct };
     });
@@ -676,30 +568,25 @@ function runAnalysis() {
       status = 'missing'; pct = 0;
     } else {
       pct = minPct === Infinity ? 0 : Math.min(100, Math.round(minPct));
-      if (pct >= 100) status = 'ok';
-      else if (pct > 0) status = 'partial';
-      else status = 'no';
+      status = pct >= 100 ? 'ok' : pct > 0 ? 'partial' : 'no';
       if (hasNoData && status !== 'no') status = 'missing';
     }
 
-    analysisResults.push({ bundle, boxes, weight, products: productDetails, status, pct, hasNoData });
+    analysisResults.push({ bundle, boxes, weight, products: productDetails, status, pct });
   });
 
   document.getElementById('resultsSection').classList.remove('hidden');
   renderStats();
   renderTable();
-
-  // Scroll to results
   document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderStats() {
-  const ok = analysisResults.filter(r => r.status === 'ok');
+  const ok      = analysisResults.filter(r => r.status === 'ok');
   const partial = analysisResults.filter(r => r.status === 'partial');
-  const no = analysisResults.filter(r => r.status === 'no');
-  const missing = analysisResults.filter(r => r.status === 'missing');
+  const no      = analysisResults.filter(r => r.status === 'no');
   const totalBoxesOk = ok.reduce((a, r) => a + r.boxes, 0);
-  const totalBoxes = analysisResults.reduce((a, r) => a + r.boxes, 0);
+  const totalBoxes   = analysisResults.reduce((a, r) => a + r.boxes, 0);
 
   document.getElementById('statsGrid').innerHTML = `
     <div class="stat-card">
@@ -721,115 +608,112 @@ function renderStats() {
       <div class="s-label">Total proyectos</div>
       <div class="s-value">${analysisResults.length}</div>
       <div class="s-sub">${totalBoxes.toLocaleString('es-ES')} cajas en plan</div>
-    </div>
-  `;
+    </div>`;
+}
+
+function prodLine(p) {
+  let html;
+  if (p.stock === null) {
+    html = '<span class="prod-nodata">sin datos en inventario</span>';
+  } else {
+    const need = p.needed !== null ? p.needed.toFixed(1) : '?';
+    const avail = p.stock.toFixed(1);
+    if (p.pct !== null && p.pct >= 100) {
+      html = `<span class="prod-ok">✓ necesito ${need} de ${avail} disponibles</span>`;
+    } else if (p.pct !== null && p.pct > 0) {
+      html = `<span class="prod-warn">⚠ necesito ${need} de ${avail} disponibles</span>`;
+    } else {
+      html = `<span class="prod-no">✗ necesito ${need} — solo hay ${avail} disponibles</span>`;
+    }
+  }
+  return `<div class="prod-item"><span class="prod-code">${p.code}</span><span>${html}</span></div>`;
+}
+
+function buildProductHtml(products, idx) {
+  const INIT = 4;
+  const total = products.length;
+  const first = products.slice(0, INIT).map(prodLine).join('');
+  if (total <= INIT) return `<div class="prod-list">${first}</div>`;
+
+  const rest = products.slice(INIT).map(prodLine).join('');
+  const n = total - INIT;
+  return `<div class="prod-list">
+    ${first}
+    <div class="prod-extra" id="ex-${idx}">${rest}</div>
+    <button class="btn-more" id="bm-${idx}" onclick="toggleExtra(${idx},${n})">▼ Ver ${n} producto${n!==1?'s':''} más</button>
+  </div>`;
+}
+
+function toggleExtra(idx, n) {
+  const ex = document.getElementById('ex-' + idx);
+  const bm = document.getElementById('bm-' + idx);
+  const open = ex.classList.toggle('open');
+  bm.textContent = open ? '▲ Ocultar' : '▼ Ver ' + n + ' producto' + (n!==1?'s':'') + ' más';
 }
 
 function renderTable() {
-  const filterStatus = document.getElementById('filterStatus').value;
-  const sortBy = document.getElementById('sortBy').value;
-  const minBoxes = parseInt(document.getElementById('minBoxes').value) || 1;
+  const fs = document.getElementById('filterStatus').value;
+  const sb = document.getElementById('sortBy').value;
+  const mb = parseInt(document.getElementById('minBoxes').value) || 1;
 
-  let data = analysisResults.filter(r => {
-    if (filterStatus && r.status !== filterStatus) return false;
-    if (r.boxes < minBoxes) return false;
-    return true;
-  });
+  let data = analysisResults.filter(r => (!fs || r.status === fs) && r.boxes >= mb);
 
   data.sort((a, b) => {
-    if (sortBy === 'boxes_desc') return b.boxes - a.boxes;
-    if (sortBy === 'boxes_asc') return a.boxes - b.boxes;
-    if (sortBy === 'pct_desc') return b.pct - a.pct;
-    if (sortBy === 'pct_asc') return a.pct - b.pct;
-    if (sortBy === 'weight_desc') return b.weight - a.weight;
+    if (sb === 'boxes_desc') return b.boxes - a.boxes;
+    if (sb === 'boxes_asc')  return a.boxes - b.boxes;
+    if (sb === 'pct_desc')   return b.pct - a.pct;
+    if (sb === 'pct_asc')    return a.pct - b.pct;
+    if (sb === 'weight_desc') return b.weight - a.weight;
     return 0;
   });
 
-  document.getElementById('tableCount').textContent = data.length + ' proyecto' + (data.length !== 1 ? 's' : '') + ' mostrados';
+  document.getElementById('tableCount').textContent = data.length + ' proyecto' + (data.length!==1?'s':'') + ' mostrados';
 
   const empty = document.getElementById('emptyState');
-  const tableWrap = document.getElementById('tableWrap');
+  const wrap  = document.getElementById('tableWrap');
 
-  if (data.length === 0) {
-    empty.classList.remove('hidden');
-    tableWrap.classList.add('hidden');
-    return;
-  }
-  empty.classList.add('hidden');
-  tableWrap.classList.remove('hidden');
+  if (data.length === 0) { empty.classList.remove('hidden'); wrap.classList.add('hidden'); return; }
+  empty.classList.add('hidden'); wrap.classList.remove('hidden');
 
-  const tbody = document.getElementById('tableBody');
-  tbody.innerHTML = data.map(r => {
-    const badge = {
-      ok: '<span class="badge badge-ok">✅ Fabricable</span>',
-      partial: '<span class="badge badge-partial">⚠️ Parcial</span>',
-      no: '<span class="badge badge-no">❌ Sin stock</span>',
-      missing: '<span class="badge badge-missing">❓ Sin datos</span>'
-    }[r.status];
+  const badges = {
+    ok: '<span class="badge badge-ok">✅ Fabricable</span>',
+    partial: '<span class="badge badge-partial">⚠️ Parcial</span>',
+    no: '<span class="badge badge-no">❌ Sin stock</span>',
+    missing: '<span class="badge badge-missing">❓ Sin datos</span>'
+  };
+  const barColors = { ok: '#1D9E75', partial: '#BA7517', no: '#E24B4A', missing: '#888780' };
 
-    const barColor = r.status === 'ok' ? '#1D9E75' : r.status === 'partial' ? '#BA7517' : '#E24B4A';
+  document.getElementById('tableBody').innerHTML = data.map((r, i) => {
+    const barColor = barColors[r.status];
     const pctLabel = r.pct !== null ? r.pct + '%' : '—';
-    const pctBar = r.pct !== null ? `<div class="progress-bar"><div class="progress-fill" style="width:${r.pct}%;background:${barColor}"></div></div>` : '';
-
-    const maxProds = 6;
-    const prodRows = r.products.slice(0, maxProds).map(p => {
-      let stockHtml;
-      if (p.stock === null) {
-        stockHtml = '<span class="prod-nodata">sin datos en inventario</span>';
-      } else if (p.pct !== null && p.pct >= 100) {
-        stockHtml = `<span class="prod-ok">✓ necesito ${p.needed.toFixed(1)} de ${p.stock.toFixed(1)} disponibles</span>`;
-      } else if (p.pct !== null && p.pct > 0) {
-        stockHtml = `<span class="prod-warn">⚠ ${p.stock.toFixed(1)} / ${p.needed.toFixed(1)} u. necesarias</span>`;
-      } else {
-        stockHtml = `<span class="prod-missing">✗ 0 u. (necesito ${p.needed ? p.needed.toFixed(1) : '?'})</span>`;
-      }
-      return `<div class="prod-item"><span class="prod-code">${p.code}</span> ${stockHtml}</div>`;
-    }).join('');
-
-    const moreHtml = r.products.length > maxProds
-      ? `<div class="prod-more">…y ${r.products.length - maxProds} producto(s) más</div>` : '';
+    const pctBar = r.pct !== null
+      ? `<div class="progress-bar"><div class="progress-fill" style="width:${r.pct}%;background:${barColor}"></div></div>`
+      : '';
 
     return `<tr>
       <td><div class="bundle-code">${r.bundle}</div></td>
       <td><div class="boxes-num">${r.boxes.toLocaleString('es-ES')}</div></td>
       <td>${r.weight.toFixed(1)}</td>
-      <td>${badge}</td>
-      <td>
-        <div class="pct-wrap">
-          <div class="pct-label">${pctLabel}</div>
-          ${pctBar}
-        </div>
-      </td>
-      <td><div class="prod-list">${prodRows}${moreHtml}</div></td>
+      <td>${badges[r.status]}</td>
+      <td><div class="pct-wrap"><div class="pct-label">${pctLabel}</div>${pctBar}</div></td>
+      <td>${buildProductHtml(r.products, i)}</td>
     </tr>`;
   }).join('');
 }
 
-// ── Export CSV ───────────────────────────────────────────────────────
 function exportCSV() {
-  const filterStatus = document.getElementById('filterStatus').value;
-  const minBoxes = parseInt(document.getElementById('minBoxes').value) || 1;
-  let data = analysisResults.filter(r => {
-    if (filterStatus && r.status !== filterStatus) return false;
-    if (r.boxes < minBoxes) return false;
-    return true;
-  });
-
-  const headers = ['WMS Bundle Code', 'Cajas', 'Peso Total (kg)', 'Estado', '% Fabricable'];
-  const rows = data.map(r => [
-    r.bundle,
-    r.boxes,
-    r.weight.toFixed(1),
-    { ok: 'Fabricable', partial: 'Parcial', no: 'Sin stock', missing: 'Sin datos' }[r.status],
-    r.pct !== null ? r.pct + '%' : '?'
-  ]);
-
-  const csv = [headers, ...rows].map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+  const fs = document.getElementById('filterStatus').value;
+  const mb = parseInt(document.getElementById('minBoxes').value) || 1;
+  const data = analysisResults.filter(r => (!fs || r.status === fs) && r.boxes >= mb);
+  const statusMap = { ok: 'Fabricable', partial: 'Parcial', no: 'Sin stock', missing: 'Sin datos' };
+  const headers = ['WMS Bundle Code','Cajas','Peso Total (kg)','Estado','% Fabricable'];
+  const rows = data.map(r => [r.bundle, r.boxes, r.weight.toFixed(1), statusMap[r.status], r.pct !== null ? r.pct + '%' : '?']);
+  const csv = [headers, ...rows].map(r => r.map(c => '"' + String(c).replace(/"/g,'""') + '"').join(',')).join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'priorizacion_' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.download = 'priorizacion_' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
   URL.revokeObjectURL(url);
 }
