@@ -21,32 +21,37 @@
 body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:14px; line-height:1.6; }
 
 /* TOPBAR */
-.topbar { background:var(--bgc); border-bottom:1px solid var(--border); padding:12px 24px; display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:200; }
+.topbar { background:var(--bgc); border-bottom:1px solid var(--border); padding:11px 24px; display:flex; align-items:center; gap:10px; position:sticky; top:0; z-index:200; }
 .topbar-logo { width:30px;height:30px;background:var(--green);border-radius:var(--rs);display:flex;align-items:center;justify-content:center;flex-shrink:0; }
 .topbar-logo svg { width:16px;height:16px;fill:white; }
-.topbar h1 { font-size:14px;font-weight:600;letter-spacing:-0.01em; }
+.topbar h1 { font-size:14px;font-weight:600;letter-spacing:-.01em; }
 .topbar-chip { font-size:11px;color:var(--text2);background:var(--bg2);padding:2px 9px;border-radius:20px;border:1px solid var(--border);margin-left:2px; }
 .topbar-right { margin-left:auto;display:flex;gap:8px;align-items:center; }
 .topbar-btn { font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bgc);color:var(--text);cursor:pointer;transition:background .15s; }
 .topbar-btn:hover { background:var(--bg2); }
-.topbar-btn.active { background:var(--text);color:white;border-color:var(--text); }
+
+/* PROGRESS BAR GLOBAL */
+.global-progress { background:var(--bgc); border-bottom:1px solid var(--border); padding:8px 24px; position:sticky; top:53px; z-index:190; display:none; }
+.gp-row { display:flex; align-items:center; gap:12px; }
+.gp-label { font-size:12px; font-weight:600; color:var(--text); white-space:nowrap; min-width:180px; }
+.gp-bar-wrap { flex:1; height:8px; background:var(--bg2); border-radius:4px; overflow:hidden; display:flex; }
+.gp-seg { height:100%; transition:width .5s ease; }
+.gp-legend { display:flex; gap:10px; flex-shrink:0; }
+.gp-leg-item { display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text2); }
+.gp-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
 
 /* TABS */
-.tabs { display:flex; gap:0; border-bottom:1px solid var(--border); background:var(--bgc); padding:0 24px; position:sticky; top:55px; z-index:190; }
-.tab { font-size:13px;font-weight:500;color:var(--text2);padding:10px 16px;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap; }
+.tabs { display:flex; gap:0; border-bottom:1px solid var(--border); background:var(--bgc); padding:0 24px; position:sticky; top:90px; z-index:180; overflow-x:auto; }
+.tabs.no-progress { top:53px; }
+.tab { font-size:13px;font-weight:500;color:var(--text2);padding:9px 14px;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;flex-shrink:0; }
 .tab:hover { color:var(--text); }
 .tab.active { color:var(--text);border-bottom-color:var(--text); }
-.tab-count { font-size:10px;background:var(--bg2);color:var(--text2);padding:1px 6px;border-radius:20px;margin-left:5px; }
+.tab-count { font-size:10px;background:var(--bg2);color:var(--text2);padding:1px 6px;border-radius:20px;margin-left:4px; }
 .tab.active .tab-count { background:var(--text);color:white; }
 
-/* MAIN */
-.main { max-width:1240px; margin:0 auto; padding:24px; }
-
-/* PANELS */
+.main { max-width:1280px; margin:0 auto; padding:24px; }
 .panel { display:none; }
 .panel.active { display:block; }
-
-/* SECTION LABEL */
 .slabel { font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:10px; }
 
 /* UPLOAD */
@@ -55,8 +60,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-se
 .upload-card { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:18px; }
 .uc-header { display:flex;align-items:center;gap:8px;margin-bottom:5px; }
 .uc-icon { width:28px;height:28px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0; }
-.uc-icon.b { background:#EBF4FE; }
-.uc-icon.p { background:#EEEDFE; }
+.uc-icon.b { background:#EBF4FE; } .uc-icon.p { background:#EEEDFE; }
 .uc-header strong { font-size:13px;font-weight:600; }
 .uc-desc { font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.5; }
 .drop-zone { border:1.5px dashed var(--border);border-radius:var(--rs);padding:20px 16px;text-align:center;cursor:pointer;transition:all .15s;background:var(--bg); }
@@ -65,28 +69,77 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-se
 .dz-icon { font-size:20px;margin-bottom:5px;display:block; }
 .dz-text { font-size:12px;color:var(--text2);display:block; }
 .drop-zone.loaded .dz-text { color:var(--green-d);font-weight:500; }
-
-/* ANALYZE BTN */
-.btn-analyze { width:100%;padding:11px;font-size:14px;font-weight:600;background:var(--text);color:white;border:none;border-radius:var(--r);cursor:pointer;transition:opacity .15s;margin-bottom:0; }
+.btn-analyze { width:100%;padding:11px;font-size:14px;font-weight:600;background:var(--text);color:white;border:none;border-radius:var(--r);cursor:pointer;transition:opacity .15s; }
 .btn-analyze:disabled { opacity:.25;cursor:not-allowed; }
 .btn-analyze:not(:disabled):hover { opacity:.82; }
 
-/* STATS */
+/* ── DASHBOARD ── */
+.dash-hero { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;margin-bottom:16px; }
+.dash-hero-top { display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap; }
+.dash-hero-title { font-size:13px;font-weight:600;color:var(--text2);margin-bottom:4px; }
+.dash-hero-pct { font-size:48px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--green); }
+.dash-hero-sub { font-size:13px;color:var(--text2);margin-top:4px; }
+.dash-big-bar { margin-top:16px; }
+.dbb-track { height:14px;background:var(--bg2);border-radius:7px;overflow:hidden;display:flex; }
+.dbb-seg { height:100%;transition:width .6s ease; }
+.dbb-legend { display:flex;gap:16px;margin-top:8px;flex-wrap:wrap; }
+.dbb-leg { display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text2); }
+.dbb-dot { width:10px;height:10px;border-radius:2px;flex-shrink:0; }
+
+.dash-kpis { display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px; }
+@media(max-width:900px){.dash-kpis{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:580px){.dash-kpis{grid-template-columns:repeat(2,1fr);}}
+.kpi { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:box-shadow .15s; }
+.kpi:hover { box-shadow:0 2px 8px rgba(0,0,0,.08); }
+.kpi .kl { font-size:11px;color:var(--text2);margin-bottom:3px;font-weight:500; }
+.kpi .kv { font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:3px; }
+.kpi .ks { font-size:11px;color:var(--text3); }
+
+.dash-row { display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px; }
+@media(max-width:800px){.dash-row{grid-template-columns:1fr;}}
+.dash-card { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);overflow:hidden; }
+.dc-head { font-size:12px;font-weight:600;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px; }
+
+/* STACKED BAR CHART */
+.chart-wrap { padding:16px;overflow-x:auto; }
+.sbc { display:flex;flex-direction:column;gap:5px;min-width:300px; }
+.sbc-row { display:flex;align-items:center;gap:8px; }
+.sbc-label { font-size:10px;font-family:monospace;color:var(--text2);width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right; }
+.sbc-bar { flex:1;height:16px;background:var(--bg2);border-radius:3px;overflow:hidden;display:flex;min-width:100px; }
+.sbc-seg { height:100%; }
+.sbc-val { font-size:10px;color:var(--text2);width:50px;flex-shrink:0; }
+
+/* TOP BLOCKERS mini */
+.bn-mini-item { display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--borderl); }
+.bn-mini-item:last-child { border-bottom:none; }
+.bn-mini-code { font-family:monospace;font-size:11px;font-weight:600;color:var(--text);min-width:100px; }
+.bn-mini-bar { flex:1;height:6px;background:var(--bg2);border-radius:3px;overflow:hidden; }
+.bn-mini-fill { height:100%;border-radius:3px;background:var(--red); }
+.bn-mini-val { font-size:11px;font-weight:600;color:var(--red-d);min-width:60px;text-align:right; }
+
+/* URGENT LIST */
+.urgent-item { display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--borderl);cursor:pointer;transition:background .15s; }
+.urgent-item:hover { background:var(--bg2); }
+.urgent-item:last-child { border-bottom:none; }
+.urgent-rank { font-size:11px;font-weight:700;color:var(--text3);width:20px;text-align:center;flex-shrink:0; }
+.urgent-code { font-family:monospace;font-size:11px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.urgent-boxes { font-size:11px;font-weight:600;color:var(--text); }
+
+/* STATS for other panels */
 .stats-grid { display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px; }
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:600px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 .stat { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px; }
 .stat .sl { font-size:11px;color:var(--text2);margin-bottom:3px;font-weight:500; }
 .stat .sv { font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:3px; }
 .stat .ss { font-size:11px;color:var(--text3); }
 
-/* FILTERS BAR */
+/* FILTERS */
 .filters-bar { display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:10px 16px;margin-bottom:12px; }
 .fg { display:flex;align-items:center;gap:6px; }
 .fg label { font-size:12px;color:var(--text2);white-space:nowrap;font-weight:500; }
-.filters-bar select,.filters-bar input[type=number] { font-size:12px;padding:5px 8px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit; }
+.filters-bar select,.filters-bar input[type=number],.filters-bar input[type=text] { font-size:12px;padding:5px 8px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:inherit; }
 
-/* TABLE WRAP */
+/* TABLE */
 .table-hdr { display:flex;align-items:center;justify-content:space-between;margin-bottom:8px; }
 .table-hdr span { font-size:12px;color:var(--text2); }
 .table-wrap { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);overflow:hidden; }
@@ -96,7 +149,6 @@ thead th { text-align:left;padding:9px 12px;font-size:11px;font-weight:600;color
 tbody td { padding:9px 12px;border-bottom:1px solid var(--borderl);vertical-align:top; }
 tbody tr:last-child td { border-bottom:none; }
 tbody tr:hover td { background:var(--bg2); }
-
 .bundle-code { font-family:'SF Mono','Fira Mono',monospace;font-size:10.5px;word-break:break-all;max-width:170px; }
 .boxes-num { font-weight:700;font-size:15px; }
 
@@ -114,55 +166,62 @@ tbody tr:hover td { background:var(--bg2); }
 .prog { height:5px;background:var(--border);border-radius:3px;overflow:hidden; }
 .prog-fill { height:100%;border-radius:3px; }
 
-/* PRODUCT LIST */
-.prod-list { font-size:11px;line-height:1.85;min-width:290px; }
+/* PRODUCTS */
+.prod-list { font-size:11px;line-height:1.85;min-width:280px; }
 .prod-item { display:grid;grid-template-columns:auto 1fr;gap:7px;align-items:baseline; }
 .prod-code { font-family:monospace;font-weight:600;font-size:10.5px;white-space:nowrap;color:var(--text); }
-.c-ok { color:var(--green-d); }
-.c-warn { color:var(--amber-d);font-weight:600; }
-.c-no { color:var(--red-d);font-weight:600; }
-.c-nd { color:var(--gray);font-style:italic; }
+.c-ok { color:var(--green-d); } .c-warn { color:var(--amber-d);font-weight:600; }
+.c-no { color:var(--red-d);font-weight:600; } .c-nd { color:var(--gray);font-style:italic; }
 .prod-extra { display:none; }
 .prod-extra.open { display:block; }
 .btn-more { margin-top:4px;font-size:11px;font-weight:500;color:var(--text2);background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:3px 10px;cursor:pointer;display:inline-block;transition:background .15s; }
 .btn-more:hover { background:var(--border); }
 
-/* EMPTY */
-.empty { text-align:center;padding:44px 24px;color:var(--text3); }
-.empty .ei { font-size:32px;display:block;margin-bottom:8px; }
-
-/* EXPORT BTN */
-.btn-exp { font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bgc);color:var(--text);cursor:pointer;transition:background .15s; }
-.btn-exp:hover { background:var(--bg2); }
+/* KANBAN */
+.kanban-wrap { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:start; }
+@media(max-width:1000px){.kanban-wrap{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.kanban-wrap{grid-template-columns:1fr;}}
+.kanban-col { background:var(--bg2);border-radius:var(--r);overflow:hidden; }
+.kanban-col-head { padding:10px 14px;font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border); }
+.kanban-col-head .kch-title { display:flex;align-items:center;gap:6px; }
+.kanban-col-head .kch-count { font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px; }
+.kanban-cards { padding:8px;display:flex;flex-direction:column;gap:6px;max-height:75vh;overflow-y:auto; }
+.kanban-card { background:var(--bgc);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;cursor:pointer;transition:box-shadow .15s; }
+.kanban-card:hover { box-shadow:0 2px 8px rgba(0,0,0,.1); }
+.kc-bundle { font-family:monospace;font-size:10px;color:var(--text2);margin-bottom:4px;word-break:break-all; }
+.kc-boxes { font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1; }
+.kc-boxes-sub { font-size:10px;color:var(--text2); }
+.kc-footer { display:flex;align-items:center;justify-content:space-between;margin-top:6px; }
+.kc-weight { font-size:10px;color:var(--text3); }
+.kc-pct { font-size:11px;font-weight:600; }
+.kc-bar { height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:5px; }
+.kc-bar-fill { height:100%;border-radius:2px; }
+.kanban-empty { padding:20px;text-align:center;font-size:12px;color:var(--text3); }
+.kanban-search { padding:8px; }
+.kanban-search input { width:100%;font-size:12px;padding:6px 10px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bgc);font-family:inherit; }
 
 /* BOTTLENECK */
 .bn-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
 @media(max-width:700px){.bn-grid{grid-template-columns:1fr;}}
 .bn-card { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);overflow:hidden; }
-.bn-card-title { font-size:12px;font-weight:600;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px; }
-.bn-list { }
+.bn-card-title { font-size:12px;font-weight:600;padding:10px 14px;background:var(--bg2);border-bottom:1px solid var(--border); }
 .bn-item { display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--borderl); }
 .bn-item:last-child { border-bottom:none; }
-.bn-item-left { }
-.bn-code { font-family:monospace;font-size:11px;font-weight:600;color:var(--text); }
+.bn-code { font-family:monospace;font-size:11px;font-weight:600; }
 .bn-sub { font-size:11px;color:var(--text2);margin-top:1px; }
 .bn-bar-wrap { width:90px; }
 .bn-bar-lbl { font-size:11px;font-weight:600;text-align:right;margin-bottom:2px; }
 
-/* PRODUCT VIEW */
-.pv-table table { }
-
-/* BUY LIST */
+/* BUY */
 .buy-summary { display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap; }
 .buy-chip { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:10px 16px;font-size:12px;color:var(--text2); }
 .buy-chip strong { font-size:18px;font-weight:700;color:var(--text);display:block;letter-spacing:-.02em; }
 
 /* HISTORY */
 .hist-list { display:flex;flex-direction:column;gap:10px; }
-.hist-card { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .15s; }
-.hist-card:hover { background:var(--bg2); }
+.hist-card { background:var(--bgc);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;gap:14px; }
 .hist-date { font-size:12px;color:var(--text2);white-space:nowrap; }
-.hist-stats { display:flex;gap:10px;flex-wrap:wrap; }
+.hist-stats { display:flex;gap:8px;flex-wrap:wrap; }
 .hist-chip { font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px; }
 .hist-actions { margin-left:auto;display:flex;gap:6px; }
 .btn-sm { font-size:11px;padding:4px 10px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bgc);cursor:pointer;transition:background .15s; }
@@ -176,211 +235,240 @@ tbody tr:hover td { background:var(--bg2); }
 .modal { background:var(--bgc);border-radius:var(--r);max-width:900px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column; }
 .modal-head { display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border); }
 .modal-head h3 { font-size:14px;font-weight:600; }
-.modal-close { font-size:20px;cursor:pointer;color:var(--text2);line-height:1;background:none;border:none; }
+.modal-close { font-size:20px;cursor:pointer;color:var(--text2);background:none;border:none;line-height:1; }
 .modal-body { overflow-y:auto;padding:18px; }
 
+.empty { text-align:center;padding:44px 24px;color:var(--text3); }
+.empty .ei { font-size:32px;display:block;margin-bottom:8px; }
+.btn-exp { font-size:12px;font-weight:500;padding:5px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bgc);color:var(--text);cursor:pointer;transition:background .15s; }
+.btn-exp:hover { background:var(--bg2); }
 .hidden { display:none!important; }
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
   <div class="topbar-logo">
     <svg viewBox="0 0 24 24"><path d="M20 7H4C2.9 7 2 7.9 2 9v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 12H4V9h16v10zM4 3h16v2H4z"/></svg>
   </div>
   <h1>Priorizador de Plan de Predicción <span class="topbar-chip">PRIORIZAENVIVO</span></h1>
   <div class="topbar-right">
-    <button class="topbar-btn" onclick="exportXLSX()" id="btnXlsx" style="display:none">📥 Exportar Excel</button>
-    <button class="topbar-btn" onclick="saveSession()" id="btnSave" style="display:none">💾 Guardar sesión</button>
+    <button class="topbar-btn" onclick="exportXLSX()" id="btnXlsx" style="display:none">📥 Excel</button>
+    <button class="topbar-btn" onclick="saveSession()" id="btnSave" style="display:none">💾 Guardar</button>
   </div>
 </div>
 
-<div class="tabs" id="tabBar">
-  <div class="tab active" onclick="switchTab('upload')" id="tab-upload">📂 Cargar ficheros</div>
-  <div class="tab" onclick="switchTab('results')" id="tab-results">📦 Proyectos <span class="tab-count" id="tc-results">0</span></div>
-  <div class="tab" onclick="switchTab('bottleneck')" id="tab-bottleneck">🔴 Cuellos de botella</div>
-  <div class="tab" onclick="switchTab('products')" id="tab-products">🗄️ Vista por producto</div>
-  <div class="tab" onclick="switchTab('buy')" id="tab-buy">🛒 Lista de compra</div>
-  <div class="tab" onclick="switchTab('history')" id="tab-history">🕐 Historial <span class="tab-count" id="tc-history">0</span></div>
+<!-- GLOBAL PROGRESS -->
+<div class="global-progress" id="globalProgress">
+  <div class="gp-row">
+    <div class="gp-label" id="gpLabel">Puedes fabricar el 0% del plan</div>
+    <div class="gp-bar-wrap" id="gpBar"></div>
+    <div class="gp-legend" id="gpLegend"></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs no-progress" id="tabBar">
+  <div class="tab active" onclick="switchTab('upload')"      id="tab-upload">📂 Cargar</div>
+  <div class="tab"        onclick="switchTab('dashboard')"   id="tab-dashboard">📊 Dashboard</div>
+  <div class="tab"        onclick="switchTab('results')"     id="tab-results">📦 Proyectos <span class="tab-count" id="tc-results">0</span></div>
+  <div class="tab"        onclick="switchTab('kanban')"      id="tab-kanban">🗂 Kanban</div>
+  <div class="tab"        onclick="switchTab('bottleneck')"  id="tab-bottleneck">🔴 Cuellos de botella</div>
+  <div class="tab"        onclick="switchTab('products')"    id="tab-products">🗄️ Por producto</div>
+  <div class="tab"        onclick="switchTab('buy')"         id="tab-buy">🛒 Lista compra</div>
+  <div class="tab"        onclick="switchTab('history')"     id="tab-history">🕐 Historial <span class="tab-count" id="tc-history">0</span></div>
 </div>
 
 <div class="main">
 
-  <!-- ═══ UPLOAD ═══ -->
-  <div class="panel active" id="panel-upload">
-    <div class="slabel" style="margin-top:4px">1 — Sube los ficheros</div>
-    <div class="upload-grid">
-      <div class="upload-card">
-        <div class="uc-header"><div class="uc-icon b">📦</div><strong>Plan de cajas pendientes</strong></div>
-        <div class="uc-desc">Columnas: <code>WMS Bundle Code</code>, <code>products</code>, <code>boxes</code>, <code>totalWeight</code></div>
-        <div class="drop-zone" id="dz1" onclick="document.getElementById('f1').click()"
-             ondragover="dov(event,'dz1')" ondragleave="dol('dz1')" ondrop="dod(event,'dz1','bundle')">
-          <span class="dz-icon" id="di1">📂</span>
-          <span class="dz-text" id="dt1">Haz clic o arrastra el .xlsx aquí</span>
-        </div>
-        <input type="file" id="f1" accept=".xlsx,.xls" style="display:none" onchange="fInput(this,'bundle')">
+<!-- ═══ UPLOAD ═══ -->
+<div class="panel active" id="panel-upload">
+  <div class="slabel" style="margin-top:4px">1 — Sube los ficheros</div>
+  <div class="upload-grid">
+    <div class="upload-card">
+      <div class="uc-header"><div class="uc-icon b">📦</div><strong>Plan de cajas pendientes</strong></div>
+      <div class="uc-desc">Columnas: <code>WMS Bundle Code</code>, <code>products</code>, <code>boxes</code>, <code>totalWeight</code></div>
+      <div class="drop-zone" id="dz1" onclick="document.getElementById('f1').click()"
+           ondragover="dov(event,'dz1')" ondragleave="dol('dz1')" ondrop="dod(event,'dz1','bundle')">
+        <span class="dz-icon" id="di1">📂</span>
+        <span class="dz-text" id="dt1">Haz clic o arrastra el .xlsx aquí</span>
       </div>
-      <div class="upload-card">
-        <div class="uc-header"><div class="uc-icon p">🗄️</div><strong>Inventario disponible</strong></div>
-        <div class="uc-desc">Columnas: <code>itemCode</code>, <code>FECHA_totalStockavailable</code></div>
-        <div class="drop-zone" id="dz2" onclick="document.getElementById('f2').click()"
-             ondragover="dov(event,'dz2')" ondragleave="dol('dz2')" ondrop="dod(event,'dz2','inventory')">
-          <span class="dz-icon" id="di2">📂</span>
-          <span class="dz-text" id="dt2">Haz clic o arrastra el .xlsx aquí</span>
-        </div>
-        <input type="file" id="f2" accept=".xlsx,.xls" style="display:none" onchange="fInput(this,'inventory')">
-      </div>
+      <input type="file" id="f1" accept=".xlsx,.xls" style="display:none" onchange="fInput(this,'bundle')">
     </div>
-    <div class="slabel">2 — Analiza</div>
-    <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">
-      🔍 Calcular qué puedo fabricar ahora mismo
-    </button>
-  </div>
-
-  <!-- ═══ RESULTS ═══ -->
-  <div class="panel" id="panel-results">
-    <div class="stats-grid" id="statsGrid"></div>
-    <div class="filters-bar">
-      <div class="fg"><label>Estado:</label>
-        <select id="filterStatus" onchange="renderResults()">
-          <option value="">Todos</option>
-          <option value="ok">✅ Fabricable</option>
-          <option value="partial">⚠️ Parcial</option>
-          <option value="no">❌ Sin stock</option>
-          <option value="missing">❓ Sin datos</option>
-        </select>
+    <div class="upload-card">
+      <div class="uc-header"><div class="uc-icon p">🗄️</div><strong>Inventario disponible</strong></div>
+      <div class="uc-desc">Columnas: <code>itemCode</code>, <code>FECHA_totalStockavailable</code> — se usa la columna de fecha más reciente automáticamente</div>
+      <div class="drop-zone" id="dz2" onclick="document.getElementById('f2').click()"
+           ondragover="dov(event,'dz2')" ondragleave="dol('dz2')" ondrop="dod(event,'dz2','inventory')">
+        <span class="dz-icon" id="di2">📂</span>
+        <span class="dz-text" id="dt2">Haz clic o arrastra el .xlsx aquí</span>
       </div>
-      <div class="fg"><label>Ordenar:</label>
-        <select id="sortBy" onchange="renderResults()">
-          <option value="boxes_desc">Más cajas primero</option>
-          <option value="boxes_asc">Menos cajas primero</option>
-          <option value="pct_desc">Mayor % stock</option>
-          <option value="pct_asc">Menor % stock</option>
-          <option value="weight_desc">Más peso primero</option>
-          <option value="fabricable_desc">Más cajas fabricables primero</option>
-        </select>
-      </div>
-      <div class="fg"><label>Mín. cajas:</label>
-        <input type="number" id="minBoxes" value="1" min="1" style="width:65px" onchange="renderResults()">
-      </div>
-    </div>
-    <div class="table-hdr">
-      <span id="tableCount"></span>
-      <button class="btn-exp" onclick="exportCSV()">⬇ CSV</button>
-    </div>
-    <div id="emptyResults" class="empty hidden"><span class="ei">🔍</span><p>Sin proyectos para estos filtros</p></div>
-    <div class="table-wrap" id="tableWrap">
-      <div class="table-scroll">
-        <table>
-          <thead><tr>
-            <th>WMS Bundle Code</th>
-            <th>Cajas plan</th>
-            <th>Cajas fabricables</th>
-            <th>Peso (kg)</th>
-            <th>Estado</th>
-            <th>% Stock</th>
-            <th>Productos</th>
-          </tr></thead>
-          <tbody id="tableBody"></tbody>
-        </table>
-      </div>
+      <input type="file" id="f2" accept=".xlsx,.xls" style="display:none" onchange="fInput(this,'inventory')">
     </div>
   </div>
-
-  <!-- ═══ BOTTLENECK ═══ -->
-  <div class="panel" id="panel-bottleneck">
-    <div class="stats-grid" id="bnStats" style="grid-template-columns:repeat(3,1fr)"></div>
-    <div class="bn-grid" id="bnGrid"></div>
-  </div>
-
-  <!-- ═══ PRODUCTS VIEW ═══ -->
-  <div class="panel" id="panel-products">
-    <div class="filters-bar" style="margin-bottom:12px">
-      <div class="fg"><label>Buscar producto:</label>
-        <input type="text" id="pvSearch" placeholder="Código..." style="font-size:12px;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-family:inherit;width:160px" oninput="renderProducts()">
-      </div>
-      <div class="fg"><label>Ordenar:</label>
-        <select id="pvSort" onchange="renderProducts()">
-          <option value="blocked_desc">Más cajas bloqueadas</option>
-          <option value="stock_asc">Menos stock primero</option>
-          <option value="projects_desc">Más proyectos afectados</option>
-          <option value="pct_asc">Menor % cobertura</option>
-        </select>
-      </div>
-    </div>
-    <div class="table-hdr"><span id="pvCount"></span></div>
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table>
-          <thead><tr>
-            <th>Código producto</th>
-            <th>Stock disponible</th>
-            <th>Proyectos afectados</th>
-            <th>Cajas bloqueadas</th>
-            <th>Total necesario</th>
-            <th>% Cobertura</th>
-            <th>Estado</th>
-          </tr></thead>
-          <tbody id="pvBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ BUY LIST ═══ -->
-  <div class="panel" id="panel-buy">
-    <div class="buy-summary" id="buySummary"></div>
-    <div class="filters-bar" style="margin-bottom:12px">
-      <div class="fg"><label>Filtrar:</label>
-        <select id="buyFilter" onchange="renderBuy()">
-          <option value="all">Todos los faltantes</option>
-          <option value="partial">Solo proyectos parciales</option>
-          <option value="no">Solo proyectos sin stock</option>
-        </select>
-      </div>
-      <div class="fg"><label>Ordenar:</label>
-        <select id="buySort" onchange="renderBuy()">
-          <option value="qty_desc">Mayor cantidad a pedir</option>
-          <option value="qty_asc">Menor cantidad</option>
-          <option value="projects_desc">Más proyectos desbloqueables</option>
-        </select>
-      </div>
-    </div>
-    <div class="table-hdr">
-      <span id="buyCount"></span>
-      <button class="btn-exp" onclick="exportBuyCSV()">⬇ Exportar lista compra CSV</button>
-    </div>
-    <div class="table-wrap">
-      <div class="table-scroll">
-        <table>
-          <thead><tr>
-            <th>Código producto</th>
-            <th>Stock actual</th>
-            <th>Total necesario</th>
-            <th>Cantidad a pedir</th>
-            <th>Proyectos que desbloquea</th>
-            <th>Cajas desbloqueables</th>
-          </tr></thead>
-          <tbody id="buyBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ HISTORY ═══ -->
-  <div class="panel" id="panel-history">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div class="slabel" style="margin-bottom:0">Sesiones guardadas</div>
-      <button class="btn-exp" onclick="clearHistory()">🗑 Borrar todo</button>
-    </div>
-    <div id="histEmpty" class="empty hidden"><span class="ei">🕐</span><p>No hay sesiones guardadas aún. Carga los ficheros y pulsa "Guardar sesión".</p></div>
-    <div class="hist-list" id="histList"></div>
-  </div>
-
+  <div class="slabel">2 — Analiza</div>
+  <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">🔍 Calcular qué puedo fabricar ahora mismo</button>
 </div>
 
+<!-- ═══ DASHBOARD ═══ -->
+<div class="panel" id="panel-dashboard">
+  <div class="dash-hero" id="dashHero"></div>
+  <div class="dash-kpis" id="dashKpis"></div>
+  <div class="dash-row">
+    <div class="dash-card">
+      <div class="dc-head">📊 Cajas por proyecto (top 20) — estado de stock</div>
+      <div class="chart-wrap" id="stackedChart"></div>
+    </div>
+    <div class="dash-card">
+      <div class="dc-head">🔴 Top cuellos de botella</div>
+      <div id="bnMini"></div>
+    </div>
+  </div>
+  <div class="dash-row">
+    <div class="dash-card">
+      <div class="dc-head">🚨 Proyectos prioritarios (más cajas fabricables hoy)</div>
+      <div id="urgentList"></div>
+    </div>
+    <div class="dash-card">
+      <div class="dc-head">📈 Distribución del plan</div>
+      <div style="padding:16px" id="dashDist"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESULTS ═══ -->
+<div class="panel" id="panel-results">
+  <div class="stats-grid" id="statsGrid"></div>
+  <div class="filters-bar">
+    <div class="fg"><label>Estado:</label>
+      <select id="filterStatus" onchange="renderResults()">
+        <option value="">Todos</option>
+        <option value="ok">✅ Fabricable</option>
+        <option value="partial">⚠️ Parcial</option>
+        <option value="no">❌ Sin stock</option>
+        <option value="missing">❓ Sin datos</option>
+      </select>
+    </div>
+    <div class="fg"><label>Ordenar:</label>
+      <select id="sortBy" onchange="renderResults()">
+        <option value="boxes_desc">Más cajas primero</option>
+        <option value="boxes_asc">Menos cajas primero</option>
+        <option value="pct_desc">Mayor % stock</option>
+        <option value="pct_asc">Menor % stock</option>
+        <option value="weight_desc">Más peso primero</option>
+        <option value="fabricable_desc">Más cajas fabricables</option>
+      </select>
+    </div>
+    <div class="fg"><label>Mín. cajas:</label>
+      <input type="number" id="minBoxes" value="1" min="1" style="width:65px" onchange="renderResults()">
+    </div>
+  </div>
+  <div class="table-hdr"><span id="tableCount"></span><button class="btn-exp" onclick="exportCSV()">⬇ CSV</button></div>
+  <div id="emptyResults" class="empty hidden"><span class="ei">🔍</span><p>Sin proyectos para estos filtros</p></div>
+  <div class="table-wrap" id="tableWrap">
+    <div class="table-scroll">
+      <table>
+        <thead><tr>
+          <th>WMS Bundle Code</th><th>Cajas plan</th><th>Cajas fabricables</th>
+          <th>Peso (kg)</th><th>Estado</th><th>% Stock</th><th>Productos</th>
+        </tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KANBAN ═══ -->
+<div class="panel" id="panel-kanban">
+  <div class="kanban-search" style="margin-bottom:10px">
+    <input type="text" id="kanbanSearch" placeholder="🔍 Buscar bundle code..." oninput="renderKanban()" style="max-width:300px;font-size:12px;padding:7px 12px;border-radius:var(--rs);border:1px solid var(--border);background:var(--bgc);font-family:inherit">
+  </div>
+  <div class="kanban-wrap" id="kanbanWrap"></div>
+</div>
+
+<!-- ═══ BOTTLENECK ═══ -->
+<div class="panel" id="panel-bottleneck">
+  <div class="stats-grid" id="bnStats" style="grid-template-columns:repeat(3,1fr)"></div>
+  <div class="bn-grid" id="bnGrid"></div>
+</div>
+
+<!-- ═══ PRODUCTS ═══ -->
+<div class="panel" id="panel-products">
+  <div class="filters-bar" style="margin-bottom:12px">
+    <div class="fg"><label>Buscar:</label>
+      <input type="text" id="pvSearch" placeholder="Código..." style="width:160px" oninput="renderProducts()">
+    </div>
+    <div class="fg"><label>Ordenar:</label>
+      <select id="pvSort" onchange="renderProducts()">
+        <option value="blocked_desc">Más cajas bloqueadas</option>
+        <option value="stock_asc">Menos stock</option>
+        <option value="projects_desc">Más proyectos</option>
+        <option value="pct_asc">Menor cobertura</option>
+      </select>
+    </div>
+  </div>
+  <div class="table-hdr"><span id="pvCount"></span></div>
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table>
+        <thead><tr>
+          <th>Código</th><th>Stock disponible</th><th>Proyectos</th>
+          <th>Cajas bloqueadas</th><th>Total necesario</th><th>% Cobertura</th><th>Estado</th>
+        </tr></thead>
+        <tbody id="pvBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BUY ═══ -->
+<div class="panel" id="panel-buy">
+  <div class="buy-summary" id="buySummary"></div>
+  <div class="filters-bar" style="margin-bottom:12px">
+    <div class="fg"><label>Filtrar:</label>
+      <select id="buyFilter" onchange="renderBuy()">
+        <option value="all">Todos los faltantes</option>
+        <option value="partial">Solo parciales</option>
+        <option value="no">Solo sin stock</option>
+      </select>
+    </div>
+    <div class="fg"><label>Ordenar:</label>
+      <select id="buySort" onchange="renderBuy()">
+        <option value="qty_desc">Mayor cantidad a pedir</option>
+        <option value="qty_asc">Menor cantidad</option>
+        <option value="projects_desc">Más proyectos desbloqueables</option>
+      </select>
+    </div>
+  </div>
+  <div class="table-hdr"><span id="buyCount"></span><button class="btn-exp" onclick="exportBuyCSV()">⬇ CSV compra</button></div>
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table>
+        <thead><tr>
+          <th>Código</th><th>Stock actual</th><th>Total necesario</th>
+          <th>Cantidad a pedir</th><th>Proyectos que desbloquea</th><th>Cajas desbloqueables</th>
+        </tr></thead>
+        <tbody id="buyBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HISTORY ═══ -->
+<div class="panel" id="panel-history">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div class="slabel" style="margin-bottom:0">Sesiones guardadas</div>
+    <button class="btn-exp" onclick="clearHistory()">🗑 Borrar todo</button>
+  </div>
+  <div id="histEmpty" class="empty hidden"><span class="ei">🕐</span><p>No hay sesiones guardadas aún.</p></div>
+  <div class="hist-list" id="histList"></div>
+</div>
+
+</div><!-- /main -->
+
 <!-- MODAL -->
-<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModal(event)">
+<div class="modal-overlay hidden" id="modalOverlay" onclick="closeModalOv(event)">
   <div class="modal">
     <div class="modal-head">
       <h3 id="modalTitle"></h3>
@@ -391,649 +479,636 @@ tbody tr:hover td { background:var(--bg2); }
 </div>
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────────────────────
-let bundleData = null, inventoryData = null;
-let analysisResults = [];   // per project
-let inventoryMap = {};      // code → total stock
-let productView = [];       // per product summary
-let buyList = [];           // items to buy
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let bundleData=null, inventoryData=null;
+let analysisResults=[], inventoryMap={}, productView=[], buyList=[];
 
-// ─── DRAG & DROP ─────────────────────────────────────────────────────────────
-function dov(e, id) { e.preventDefault(); document.getElementById(id).classList.add('dragging'); }
-function dol(id) { document.getElementById(id).classList.remove('dragging'); }
-function dod(e, dzId, type) { e.preventDefault(); dol(dzId); const f = e.dataTransfer.files[0]; if(f) loadFile(f, type); }
-function fInput(inp, type) { const f = inp.files[0]; if(f) loadFile(f, type); }
+// ─── DRAG & DROP ──────────────────────────────────────────────────────────────
+function dov(e,id){e.preventDefault();document.getElementById(id).classList.add('dragging');}
+function dol(id){document.getElementById(id).classList.remove('dragging');}
+function dod(e,dzId,type){e.preventDefault();dol(dzId);const f=e.dataTransfer.files[0];if(f)loadFile(f,type);}
+function fInput(inp,type){const f=inp.files[0];if(f)loadFile(f,type);}
 
-function loadFile(file, type) {
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const wb = XLSX.read(e.target.result, { type:'array' });
-      const data = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { defval:'' });
-      if (type === 'bundle') { bundleData = data; setLoaded('dz1','di1','dt1', file.name, data.length); }
-      else { inventoryData = data; setLoaded('dz2','di2','dt2', file.name, data.length); }
+function loadFile(file,type){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{
+      const wb=XLSX.read(e.target.result,{type:'array'});
+      const data=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
+      if(type==='bundle'){bundleData=data;setLoaded('dz1','di1','dt1',file.name,data.length);}
+      else{inventoryData=data;setLoaded('dz2','di2','dt2',file.name,data.length);}
       checkReady();
-    } catch(err) { alert('Error leyendo fichero: ' + err.message); }
+    }catch(err){alert('Error leyendo fichero: '+err.message);}
   };
   reader.readAsArrayBuffer(file);
 }
-
-function setLoaded(dzId, iconId, txtId, name, rows) {
+function setLoaded(dzId,iconId,txtId,name,rows){
   document.getElementById(dzId).classList.add('loaded');
-  document.getElementById(iconId).textContent = '✅';
-  document.getElementById(txtId).textContent = name + ' — ' + rows.toLocaleString('es-ES') + ' filas';
+  document.getElementById(iconId).textContent='✅';
+  document.getElementById(txtId).textContent=name+' — '+rows.toLocaleString('es-ES')+' filas';
+}
+function checkReady(){document.getElementById('analyzeBtn').disabled=!(bundleData&&inventoryData);}
+
+// ─── FIND MOST RECENT STOCK COLUMN ───────────────────────────────────────────
+function findStockCol(rows){
+  // Find all columns matching *_totalStockavailable
+  const sample = rows.find(r=>Object.keys(r).some(k=>k.includes('totalStockavailable')));
+  if(!sample) return null;
+  const cols = Object.keys(sample).filter(k=>k.includes('totalStockavailable'));
+  if(!cols.length) return null;
+  // Sort descending by date prefix and take the most recent
+  cols.sort((a,b)=>b.localeCompare(a));
+  return cols[0];
 }
 
-function checkReady() {
-  document.getElementById('analyzeBtn').disabled = !(bundleData && inventoryData);
-}
-
-// ─── PARSE ───────────────────────────────────────────────────────────────────
-function parseProducts(str) {
-  str = String(str || '');
-  const res = [];
-  const re = /([^,()\n]+?)\s*\(([0-9.]+)\s*kg\)/gi;
+// ─── PARSE ────────────────────────────────────────────────────────────────────
+function parseProducts(str){
+  str=String(str||'');
+  const res=[];
+  const re=/([^,()\n]+?)\s*\(([0-9.]+)\s*kg\)/gi;
   let m;
-  while ((m = re.exec(str)) !== null) {
-    const code = m[1].trim(), weight = parseFloat(m[2]);
-    if (code) res.push({ code, weight });
-  }
-  if (res.length === 0 && str.trim()) {
-    str.split(',').forEach(p => { const c = p.trim().split('(')[0].trim(); if(c) res.push({ code:c, weight:null }); });
-  }
+  while((m=re.exec(str))!==null){const code=m[1].trim(),weight=parseFloat(m[2]);if(code)res.push({code,weight});}
+  if(res.length===0&&str.trim()){str.split(',').forEach(p=>{const c=p.trim().split('(')[0].trim();if(c)res.push({code:c,weight:null});});}
   return res;
 }
 
-function findStockCol(row) {
-  const keys = Object.keys(row);
-  const today = new Date().toISOString().slice(0,10);
-  return keys.find(k => k.startsWith(today) && k.includes('totalStockavailable'))
-      || keys.find(k => k.includes('totalStockavailable'))
-      || keys.find(k => k.includes('totalStock')) || null;
-}
-
-// ─── ANALYSIS ────────────────────────────────────────────────────────────────
-function runAnalysis() {
-  // Build inventory map
-  inventoryMap = {};
-  let stockCol = null;
-  inventoryData.forEach(row => {
-    if (!stockCol) stockCol = findStockCol(row);
-    const code = String(row['itemCode'] || row['ItemCode'] || '').trim();
-    if (!code) return;
-    inventoryMap[code] = (inventoryMap[code] || 0) + (parseFloat(row[stockCol] || 0) || 0);
+// ─── ANALYSIS ─────────────────────────────────────────────────────────────────
+function runAnalysis(){
+  inventoryMap={};
+  const stockCol=findStockCol(inventoryData);
+  inventoryData.forEach(row=>{
+    const code=String(row['itemCode']||row['ItemCode']||'').trim();
+    if(!code) return;
+    const stock=parseFloat(row[stockCol]||0)||0;
+    // Only sum positive stock values
+    if(stock>0) inventoryMap[code]=(inventoryMap[code]||0)+stock;
+    else if(!inventoryMap[code]) inventoryMap[code]=0;
   });
 
-  // Analyse each bundle
-  analysisResults = [];
-  bundleData.forEach(row => {
-    const bundle = String(row['WMS Bundle Code'] || row['WMS_Bundle_Code'] || '').trim();
-    const boxes  = parseInt(row['boxes'] || row['Boxes'] || 0) || 0;
-    const weight = parseFloat(row['totalWeight'] || row['total_weight'] || row['TotalWeight'] || 0) || 0;
-    const prodStr = row['products'] || row['Products'] || '';
-    if (!bundle || boxes <= 0) return;
+  analysisResults=[];
+  bundleData.forEach(row=>{
+    const bundle=String(row['WMS Bundle Code']||row['WMS_Bundle_Code']||'').trim();
+    const boxes=parseInt(row['boxes']||row['Boxes']||0)||0;
+    const weight=parseFloat(row['totalWeight']||row['total_weight']||row['TotalWeight']||0)||0;
+    const prodStr=row['products']||row['Products']||'';
+    if(!bundle||boxes<=0) return;
 
-    const products = parseProducts(String(prodStr));
-    let minPct = Infinity, hasNoData = false;
+    const products=parseProducts(String(prodStr));
+    let minPct=Infinity, hasNoData=false;
 
-    const productDetails = products.map(p => {
-      const stock = inventoryMap[p.code];
-      if (stock === undefined) { hasNoData = true; return { ...p, stock:null, needed:null, pct:null, fabricable:0 }; }
-      const needed = p.weight !== null ? p.weight * boxes : boxes;
-      const pct = needed > 0 ? Math.min(100, (stock / needed) * 100) : (stock > 0 ? 100 : 0);
-      // how many boxes can this product cover?
-      const fabricable = p.weight !== null && p.weight > 0 ? Math.floor(stock / p.weight) : (stock > 0 ? boxes : 0);
-      if (pct < minPct) minPct = pct;
-      return { ...p, stock, needed, pct, fabricable };
+    const productDetails=products.map(p=>{
+      const stock=inventoryMap[p.code];
+      if(stock===undefined){hasNoData=true;return{...p,stock:null,needed:null,pct:null,fabricable:0};}
+      const needed=p.weight!==null?p.weight*boxes:boxes;
+      const pct=needed>0?Math.min(100,(stock/needed)*100):(stock>0?100:0);
+      const fabricable=p.weight!==null&&p.weight>0?Math.floor(stock/p.weight):(stock>0?boxes:0);
+      if(pct<minPct)minPct=pct;
+      return{...p,stock,needed,pct,fabricable};
     });
 
-    let status, pct;
-    if (products.length === 0 || (hasNoData && minPct === Infinity)) { status='missing'; pct=0; }
-    else {
-      pct = minPct === Infinity ? 0 : Math.min(100, Math.round(minPct));
-      status = pct >= 100 ? 'ok' : pct > 0 ? 'partial' : 'no';
-      if (hasNoData && status !== 'no') status = 'missing';
+    let status,pct;
+    if(products.length===0||(hasNoData&&minPct===Infinity)){status='missing';pct=0;}
+    else{
+      pct=minPct===Infinity?0:Math.min(100,Math.round(minPct));
+      status=pct>=100?'ok':pct>0?'partial':'no';
+      if(hasNoData&&status!=='no')status='missing';
     }
 
-    // fabricable boxes = min across all products that have data
-    const fabricableBoxes = productDetails.reduce((acc, p) => {
-      if (p.stock === null) return acc; // ignore no-data products
-      return Math.min(acc, p.fabricable);
-    }, boxes);
+    const fabricableBoxes=productDetails.reduce((acc,p)=>{
+      if(p.stock===null)return acc;
+      return Math.min(acc,p.fabricable);
+    },boxes);
 
-    analysisResults.push({ bundle, boxes, weight, products: productDetails, status, pct, hasNoData, fabricableBoxes });
+    analysisResults.push({bundle,boxes,weight,products:productDetails,status,pct,hasNoData,fabricableBoxes});
   });
 
-  // Build product view
   buildProductView();
   buildBuyList();
+  renderAll();
 
-  // Update UI
+  document.getElementById('tc-results').textContent=analysisResults.length;
+  document.getElementById('btnSave').style.display='';
+  document.getElementById('btnXlsx').style.display='';
+  document.getElementById('globalProgress').style.display='';
+  document.getElementById('tabBar').classList.remove('no-progress');
+  loadHistory();
+  switchTab('dashboard');
+}
+
+function renderAll(){
+  renderGlobalProgress();
+  renderDashboard();
   renderStats();
   renderResults();
+  renderKanban();
   renderBottleneck();
   renderProducts();
   renderBuy();
-  loadHistory();
-
-  document.getElementById('tc-results').textContent = analysisResults.length;
-  document.getElementById('btnSave').style.display = '';
-  document.getElementById('btnXlsx').style.display = '';
-
-  switchTab('results');
 }
 
-function buildProductView() {
-  const map = {};
-  analysisResults.forEach(r => {
-    r.products.forEach(p => {
-      if (!map[p.code]) map[p.code] = { code:p.code, stock: inventoryMap[p.code] ?? null, projects:[], totalNeeded:0, blockedBoxes:0 };
-      const entry = map[p.code];
-      entry.projects.push(r.bundle);
-      if (p.needed !== null) entry.totalNeeded += p.needed;
-      if (r.status !== 'ok' && p.pct !== null && p.pct < 100) entry.blockedBoxes += r.boxes;
+// ─── GLOBAL PROGRESS BAR ──────────────────────────────────────────────────────
+function renderGlobalProgress(){
+  const total=analysisResults.reduce((a,r)=>a+r.boxes,0)||1;
+  const ok=analysisResults.filter(r=>r.status==='ok').reduce((a,r)=>a+r.boxes,0);
+  const partial=analysisResults.filter(r=>r.status==='partial').reduce((a,r)=>a+r.fabricableBoxes,0);
+  const totalFab=ok+partial;
+  const pct=Math.round((totalFab/total)*100);
+
+  const okPct=Math.round((ok/total)*100);
+  const parPct=Math.round((partial/total)*100);
+  const noPct=100-okPct-parPct;
+
+  document.getElementById('gpLabel').textContent=`Puedes fabricar el ${pct}% del plan hoy (${totalFab.toLocaleString('es-ES')} de ${total.toLocaleString('es-ES')} cajas)`;
+  document.getElementById('gpBar').innerHTML=`
+    <div class="gp-seg" style="width:${okPct}%;background:var(--green)"></div>
+    <div class="gp-seg" style="width:${parPct}%;background:var(--amber)"></div>
+    <div class="gp-seg" style="width:${Math.max(0,noPct)}%;background:var(--red)"></div>`;
+  document.getElementById('gpLegend').innerHTML=`
+    <div class="gp-leg-item"><div class="gp-dot" style="background:var(--green)"></div>${okPct}% 100%</div>
+    <div class="gp-leg-item"><div class="gp-dot" style="background:var(--amber)"></div>${parPct}% parcial</div>
+    <div class="gp-leg-item"><div class="gp-dot" style="background:var(--red)"></div>${Math.max(0,noPct)}% bloqueado</div>`;
+}
+
+// ─── DASHBOARD ────────────────────────────────────────────────────────────────
+function renderDashboard(){
+  const total=analysisResults.reduce((a,r)=>a+r.boxes,0)||1;
+  const ok=analysisResults.filter(r=>r.status==='ok');
+  const partial=analysisResults.filter(r=>r.status==='partial');
+  const no=analysisResults.filter(r=>r.status==='no');
+  const missing=analysisResults.filter(r=>r.status==='missing');
+  const totalFab=analysisResults.reduce((a,r)=>a+(r.fabricableBoxes||0),0);
+  const pct=Math.round((totalFab/total)*100);
+
+  const okBoxes=ok.reduce((a,r)=>a+r.boxes,0);
+  const parBoxes=partial.reduce((a,r)=>a+r.boxes,0);
+  const noBoxes=no.reduce((a,r)=>a+r.boxes,0);
+  const missBoxes=missing.reduce((a,r)=>a+r.boxes,0);
+
+  const okPct=Math.round((okBoxes/total)*100);
+  const parPct=Math.round((parBoxes/total)*100);
+  const noPct=Math.round((noBoxes/total)*100);
+  const missPct=Math.max(0,100-okPct-parPct-noPct);
+
+  // Hero
+  document.getElementById('dashHero').innerHTML=`
+    <div class="dash-hero-top">
+      <div>
+        <div class="dash-hero-title">Fabricable hoy</div>
+        <div class="dash-hero-pct" style="color:${pct>=70?'var(--green)':pct>=40?'var(--amber)':'var(--red)'}">${pct}%</div>
+        <div class="dash-hero-sub">${totalFab.toLocaleString('es-ES')} de ${total.toLocaleString('es-ES')} cajas · ${analysisResults.length} proyectos</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--text2);margin-bottom:4px">Columna de stock usada:</div>
+        <div style="font-size:12px;font-family:monospace;color:var(--blue-d);background:var(--blue-l);padding:3px 10px;border-radius:4px" id="stockColLabel">—</div>
+      </div>
+    </div>
+    <div class="dash-big-bar">
+      <div class="dbb-track">
+        <div class="dbb-seg" style="width:${okPct}%;background:var(--green)"></div>
+        <div class="dbb-seg" style="width:${parPct}%;background:var(--amber)"></div>
+        <div class="dbb-seg" style="width:${noPct}%;background:var(--red)"></div>
+        <div class="dbb-seg" style="width:${missPct}%;background:var(--gray)"></div>
+      </div>
+      <div class="dbb-legend">
+        <div class="dbb-leg"><div class="dbb-dot" style="background:var(--green)"></div>Fabricables ${okBoxes.toLocaleString('es-ES')} cajas (${okPct}%)</div>
+        <div class="dbb-leg"><div class="dbb-dot" style="background:var(--amber)"></div>Parciales ${parBoxes.toLocaleString('es-ES')} cajas (${parPct}%)</div>
+        <div class="dbb-leg"><div class="dbb-dot" style="background:var(--red)"></div>Sin stock ${noBoxes.toLocaleString('es-ES')} cajas (${noPct}%)</div>
+        <div class="dbb-leg"><div class="dbb-dot" style="background:var(--gray)"></div>Sin datos ${missBoxes.toLocaleString('es-ES')} cajas (${missPct}%)</div>
+      </div>
+    </div>`;
+
+  // Update stock col label
+  const sc=findStockCol(inventoryData);
+  if(sc) document.getElementById('stockColLabel').textContent=sc;
+
+  // KPIs
+  document.getElementById('dashKpis').innerHTML=`
+    <div class="kpi" onclick="switchTabFiltered('results','ok')"><div class="kl">Fabricables 100%</div><div class="kv" style="color:var(--green)">${ok.length}</div><div class="ks">${okBoxes.toLocaleString('es-ES')} cajas</div></div>
+    <div class="kpi" onclick="switchTabFiltered('results','partial')"><div class="kl">Stock parcial</div><div class="kv" style="color:var(--amber)">${partial.length}</div><div class="ks">${parBoxes.toLocaleString('es-ES')} cajas</div></div>
+    <div class="kpi" onclick="switchTabFiltered('results','no')"><div class="kl">Sin stock</div><div class="kv" style="color:var(--red)">${no.length}</div><div class="ks">${noBoxes.toLocaleString('es-ES')} cajas</div></div>
+    <div class="kpi" onclick="switchTab('buy')"><div class="kl">Artículos a comprar</div><div class="kv" style="color:var(--blue)">${buyList.length}</div><div class="ks">para desbloquear stock</div></div>
+    <div class="kpi" onclick="switchTab('bottleneck')"><div class="kl">Cuellos de botella</div><div class="kv">${productView.filter(p=>p.pct!==null&&p.pct<100).length}</div><div class="ks">productos con stock bajo</div></div>`;
+
+  // Stacked bar chart — top 20 by boxes
+  const top20=[...analysisResults].sort((a,b)=>b.boxes-a.boxes).slice(0,20);
+  const maxBoxes=top20[0]?.boxes||1;
+  const colorMap={ok:'#1D9E75',partial:'#BA7517',no:'#E24B4A',missing:'#888780'};
+  document.getElementById('stackedChart').innerHTML=`<div class="sbc">${top20.map(r=>{
+    const fabPct=Math.round((r.fabricableBoxes/r.boxes)*100);
+    const remPct=100-fabPct;
+    const shortLabel=r.bundle.length>18?r.bundle.slice(0,18)+'…':r.bundle;
+    return `<div class="sbc-row" title="${r.bundle} — ${r.boxes} cajas — ${r.fabricableBoxes} fabricables">
+      <div class="sbc-label">${shortLabel}</div>
+      <div class="sbc-bar">
+        <div class="sbc-seg" style="width:${fabPct}%;background:${colorMap[r.status]}"></div>
+        <div class="sbc-seg" style="width:${remPct}%;background:var(--borderl)"></div>
+      </div>
+      <div class="sbc-val">${r.boxes.toLocaleString('es-ES')}</div>
+    </div>`;
+  }).join('')}</div>`;
+
+  // Top blockers mini
+  const blockers={};
+  analysisResults.forEach(r=>{
+    if(r.status==='ok') return;
+    r.products.forEach(p=>{
+      if(p.pct!==null&&p.pct<100&&p.stock!==null){
+        if(!blockers[p.code])blockers[p.code]={code:p.code,blockedBoxes:0,projects:0};
+        blockers[p.code].blockedBoxes+=r.boxes;
+        blockers[p.code].projects++;
+      }
     });
   });
-  productView = Object.values(map).map(e => {
-    const pct = e.stock !== null && e.totalNeeded > 0 ? Math.min(100, Math.round((e.stock / e.totalNeeded) * 100)) : (e.stock === null ? null : 100);
-    return { ...e, pct };
-  });
+  const topB=Object.values(blockers).sort((a,b)=>b.blockedBoxes-a.blockedBoxes).slice(0,8);
+  const maxB=topB[0]?.blockedBoxes||1;
+  document.getElementById('bnMini').innerHTML=topB.map(b=>`
+    <div class="bn-mini-item">
+      <div class="bn-mini-code">${b.code}</div>
+      <div class="bn-mini-bar"><div class="bn-mini-fill" style="width:${Math.round((b.blockedBoxes/maxB)*100)}%"></div></div>
+      <div class="bn-mini-val">${b.blockedBoxes.toLocaleString('es-ES')} cajas</div>
+    </div>`).join('');
+
+  // Urgent: fabricables with most boxes
+  const urgent=[...analysisResults].filter(r=>r.status==='ok'||r.fabricableBoxes>0).sort((a,b)=>b.fabricableBoxes-a.fabricableBoxes).slice(0,8);
+  document.getElementById('urgentList').innerHTML=urgent.map((r,i)=>`
+    <div class="urgent-item" onclick="showModal('${r.bundle}',${JSON.stringify(r.products).replace(/'/g,'')})">
+      <div class="urgent-rank">${i+1}</div>
+      <div class="urgent-code">${r.bundle}</div>
+      <span class="badge ${r.status==='ok'?'b-ok':'b-partial'}">${r.fabricableBoxes.toLocaleString('es-ES')} fab.</span>
+      <div class="urgent-boxes" style="color:var(--text2);font-size:11px">/ ${r.boxes.toLocaleString('es-ES')}</div>
+    </div>`).join('');
+
+  // Distribution
+  document.getElementById('dashDist').innerHTML=[
+    {label:'✅ Fabricables',count:ok.length,boxes:okBoxes,color:'var(--green)'},
+    {label:'⚠️ Parciales',count:partial.length,boxes:parBoxes,color:'var(--amber)'},
+    {label:'❌ Sin stock',count:no.length,boxes:noBoxes,color:'var(--red)'},
+    {label:'❓ Sin datos',count:missing.length,boxes:missBoxes,color:'var(--gray)'}
+  ].map(d=>`
+    <div style="display:grid;grid-template-columns:130px 1fr auto auto;gap:10px;align-items:center;margin-bottom:12px">
+      <span style="font-size:12px;color:var(--text2)">${d.label}</span>
+      <div class="prog" style="height:8px"><div class="prog-fill" style="width:${Math.round((d.count/analysisResults.length)*100)}%;background:${d.color}"></div></div>
+      <span style="font-size:12px;font-weight:600;min-width:28px;text-align:right">${d.count}</span>
+      <span style="font-size:11px;color:var(--text3);min-width:70px;text-align:right">${d.boxes.toLocaleString('es-ES')} cajas</span>
+    </div>`).join('');
 }
 
-function buildBuyList() {
-  const map = {};
-  analysisResults.forEach(r => {
-    if (r.status === 'ok') return;
-    r.products.forEach(p => {
-      if (p.stock === null || p.pct === null || p.pct >= 100) return;
-      const shortage = Math.max(0, (p.needed || 0) - (p.stock || 0));
-      if (shortage <= 0) return;
-      if (!map[p.code]) map[p.code] = { code:p.code, stock: p.stock || 0, totalNeeded:0, projects:new Set(), unlockBoxes:0 };
-      map[p.code].totalNeeded += p.needed || 0;
-      map[p.code].projects.add(r.bundle);
-      map[p.code].unlockBoxes += r.boxes;
-    });
-  });
-  buyList = Object.values(map).map(e => ({
-    ...e,
-    projects: [...e.projects],
-    toOrder: Math.ceil(Math.max(0, e.totalNeeded - e.stock))
-  }));
+// ─── KANBAN ───────────────────────────────────────────────────────────────────
+function renderKanban(){
+  const search=(document.getElementById('kanbanSearch').value||'').toLowerCase();
+  const cols=[
+    {key:'ok',   label:'✅ Fabricable',color:'var(--green)',  headBg:'var(--green-l)',  countBg:'var(--green)',  countColor:'white'},
+    {key:'partial',label:'⚠️ Parcial',color:'var(--amber)',  headBg:'var(--amber-l)',  countBg:'var(--amber)',  countColor:'white'},
+    {key:'no',   label:'❌ Sin stock', color:'var(--red)',    headBg:'var(--red-l)',    countBg:'var(--red)',    countColor:'white'},
+    {key:'missing',label:'❓ Sin datos',color:'var(--gray)', headBg:'var(--gray-l)',   countBg:'var(--gray)',   countColor:'white'},
+  ];
+  const barColors={ok:'#1D9E75',partial:'#BA7517',no:'#E24B4A',missing:'#888780'};
+
+  document.getElementById('kanbanWrap').innerHTML=cols.map(col=>{
+    let cards=analysisResults.filter(r=>r.status===col.key);
+    if(search) cards=cards.filter(r=>r.bundle.toLowerCase().includes(search));
+    cards.sort((a,b)=>b.boxes-a.boxes);
+
+    const cardHtml=cards.length===0
+      ?`<div class="kanban-empty">Sin proyectos</div>`
+      :cards.map(r=>`
+        <div class="kanban-card" onclick="openKanbanCard(${analysisResults.indexOf(r)})">
+          <div class="kc-bundle">${r.bundle}</div>
+          <div class="kc-boxes">${r.boxes.toLocaleString('es-ES')}</div>
+          <div class="kc-boxes-sub">cajas en plan</div>
+          <div class="kc-footer">
+            <div class="kc-weight">${r.weight.toFixed(1)} kg</div>
+            <div class="kc-pct" style="color:${barColors[col.key]}">${r.fabricableBoxes>0?r.fabricableBoxes.toLocaleString('es-ES')+' fab.':r.pct+'%'}</div>
+          </div>
+          <div class="kc-bar"><div class="kc-bar-fill" style="width:${r.pct}%;background:${barColors[col.key]}"></div></div>
+        </div>`).join('');
+
+    return `<div class="kanban-col">
+      <div class="kanban-col-head" style="background:${col.headBg}">
+        <div class="kch-title" style="color:${col.color}">${col.label}</div>
+        <span class="kch-count" style="background:${col.countBg};color:${col.countColor}">${cards.length}</span>
+      </div>
+      <div class="kanban-cards">${cardHtml}</div>
+    </div>`;
+  }).join('');
 }
 
-// ─── RENDER STATS ────────────────────────────────────────────────────────────
-function renderStats() {
-  const ok      = analysisResults.filter(r => r.status === 'ok');
-  const partial = analysisResults.filter(r => r.status === 'partial');
-  const no      = analysisResults.filter(r => r.status === 'no');
-  const totalBoxesOk = ok.reduce((a,r) => a+r.boxes, 0);
-  const totalFab = analysisResults.reduce((a,r) => a + (r.fabricableBoxes||0), 0);
-  const totalBoxes = analysisResults.reduce((a,r) => a+r.boxes, 0);
+function openKanbanCard(idx){
+  const r=analysisResults[idx];
+  document.getElementById('modalTitle').textContent=r.bundle;
+  document.getElementById('modalBody').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+      <div style="background:var(--bg2);border-radius:var(--rs);padding:12px"><div style="font-size:11px;color:var(--text2)">Cajas plan</div><div style="font-size:22px;font-weight:700">${r.boxes.toLocaleString('es-ES')}</div></div>
+      <div style="background:var(--bg2);border-radius:var(--rs);padding:12px"><div style="font-size:11px;color:var(--text2)">Fabricables hoy</div><div style="font-size:22px;font-weight:700;color:var(--green)">${r.fabricableBoxes.toLocaleString('es-ES')}</div></div>
+      <div style="background:var(--bg2);border-radius:var(--rs);padding:12px"><div style="font-size:11px;color:var(--text2)">Peso total</div><div style="font-size:22px;font-weight:700">${r.weight.toFixed(1)} kg</div></div>
+    </div>
+    <div style="font-size:12px;font-weight:600;margin-bottom:8px">Productos (${r.products.length})</div>
+    <div style="font-size:12px;line-height:1.9">${r.products.map(prodLine).join('')}</div>`;
+  document.getElementById('modalOverlay').classList.remove('hidden');
+}
 
-  document.getElementById('statsGrid').innerHTML = `
-    <div class="stat"><div class="sl">Fabricables 100%</div><div class="sv" style="color:var(--green)">${ok.length}</div><div class="ss">${totalBoxesOk.toLocaleString('es-ES')} cajas</div></div>
+// ─── RESULTS ──────────────────────────────────────────────────────────────────
+const BADGES={ok:'<span class="badge b-ok">✅ Fabricable</span>',partial:'<span class="badge b-partial">⚠️ Parcial</span>',no:'<span class="badge b-no">❌ Sin stock</span>',missing:'<span class="badge b-missing">❓ Sin datos</span>'};
+const BAR_COLOR={ok:'#1D9E75',partial:'#BA7517',no:'#E24B4A',missing:'#888780'};
+
+function renderStats(){
+  const ok=analysisResults.filter(r=>r.status==='ok');
+  const partial=analysisResults.filter(r=>r.status==='partial');
+  const no=analysisResults.filter(r=>r.status==='no');
+  const totalFab=analysisResults.reduce((a,r)=>a+(r.fabricableBoxes||0),0);
+  const totalBoxes=analysisResults.reduce((a,r)=>a+r.boxes,0);
+  document.getElementById('statsGrid').innerHTML=`
+    <div class="stat"><div class="sl">Fabricables 100%</div><div class="sv" style="color:var(--green)">${ok.length}</div><div class="ss">${ok.reduce((a,r)=>a+r.boxes,0).toLocaleString('es-ES')} cajas</div></div>
     <div class="stat"><div class="sl">Stock parcial</div><div class="sv" style="color:var(--amber)">${partial.length}</div><div class="ss">Falta algún producto</div></div>
     <div class="stat"><div class="sl">Sin stock</div><div class="sv" style="color:var(--red)">${no.length}</div><div class="ss">No fabricables hoy</div></div>
     <div class="stat"><div class="sl">Cajas fabricables hoy</div><div class="sv" style="color:var(--blue)">${totalFab.toLocaleString('es-ES')}</div><div class="ss">de ${totalBoxes.toLocaleString('es-ES')} en plan</div></div>
     <div class="stat"><div class="sl">Total proyectos</div><div class="sv">${analysisResults.length}</div><div class="ss">${totalBoxes.toLocaleString('es-ES')} cajas plan</div></div>`;
 }
 
-// ─── RENDER RESULTS TABLE ────────────────────────────────────────────────────
-const BADGES = {
-  ok:'<span class="badge b-ok">✅ Fabricable</span>',
-  partial:'<span class="badge b-partial">⚠️ Parcial</span>',
-  no:'<span class="badge b-no">❌ Sin stock</span>',
-  missing:'<span class="badge b-missing">❓ Sin datos</span>'
-};
-const BAR_COLOR = { ok:'#1D9E75', partial:'#BA7517', no:'#E24B4A', missing:'#888780' };
-
-function renderResults() {
-  const fs = document.getElementById('filterStatus').value;
-  const sb = document.getElementById('sortBy').value;
-  const mb = parseInt(document.getElementById('minBoxes').value) || 1;
-
-  let data = analysisResults.filter(r => (!fs || r.status === fs) && r.boxes >= mb);
-
-  data.sort((a,b) => {
-    if (sb==='boxes_desc') return b.boxes-a.boxes;
-    if (sb==='boxes_asc')  return a.boxes-b.boxes;
-    if (sb==='pct_desc')   return b.pct-a.pct;
-    if (sb==='pct_asc')    return a.pct-b.pct;
-    if (sb==='weight_desc') return b.weight-a.weight;
-    if (sb==='fabricable_desc') return (b.fabricableBoxes||0)-(a.fabricableBoxes||0);
+function renderResults(){
+  const fs=document.getElementById('filterStatus').value;
+  const sb=document.getElementById('sortBy').value;
+  const mb=parseInt(document.getElementById('minBoxes').value)||1;
+  let data=analysisResults.filter(r=>(!fs||r.status===fs)&&r.boxes>=mb);
+  data.sort((a,b)=>{
+    if(sb==='boxes_desc')return b.boxes-a.boxes;if(sb==='boxes_asc')return a.boxes-b.boxes;
+    if(sb==='pct_desc')return b.pct-a.pct;if(sb==='pct_asc')return a.pct-b.pct;
+    if(sb==='weight_desc')return b.weight-a.weight;
+    if(sb==='fabricable_desc')return(b.fabricableBoxes||0)-(a.fabricableBoxes||0);
     return 0;
   });
-
-  document.getElementById('tableCount').textContent = data.length + ' proyecto' + (data.length!==1?'s':'') + ' mostrados';
-  const empty = document.getElementById('emptyResults');
-  const wrap  = document.getElementById('tableWrap');
-
-  if (!data.length) { empty.classList.remove('hidden'); wrap.classList.add('hidden'); return; }
-  empty.classList.add('hidden'); wrap.classList.remove('hidden');
-
-  document.getElementById('tableBody').innerHTML = data.map((r,i) => {
-    const bc = BAR_COLOR[r.status];
-    const pctLbl = r.pct !== null ? r.pct+'%' : '—';
-    const bar = r.pct !== null ? `<div class="prog"><div class="prog-fill" style="width:${r.pct}%;background:${bc}"></div></div>` : '';
-    const fabBadge = r.fabricableBoxes >= r.boxes
-      ? `<span class="badge b-ok">${r.fabricableBoxes.toLocaleString('es-ES')}</span>`
-      : r.fabricableBoxes > 0
-        ? `<span class="badge b-partial">${r.fabricableBoxes.toLocaleString('es-ES')}</span>`
-        : `<span class="badge b-no">0</span>`;
-
-    return `<tr>
-      <td><div class="bundle-code">${r.bundle}</div></td>
-      <td><div class="boxes-num">${r.boxes.toLocaleString('es-ES')}</div></td>
-      <td>${fabBadge}</td>
-      <td>${r.weight.toFixed(1)}</td>
-      <td>${BADGES[r.status]}</td>
-      <td><div class="pct-wrap"><div class="pct-lbl">${pctLbl}</div>${bar}</div></td>
-      <td>${buildProdHtml(r.products, i)}</td>
-    </tr>`;
+  document.getElementById('tableCount').textContent=data.length+' proyecto'+(data.length!==1?'s':'')+' mostrados';
+  const empty=document.getElementById('emptyResults'),wrap=document.getElementById('tableWrap');
+  if(!data.length){empty.classList.remove('hidden');wrap.classList.add('hidden');return;}
+  empty.classList.add('hidden');wrap.classList.remove('hidden');
+  document.getElementById('tableBody').innerHTML=data.map((r,i)=>{
+    const bc=BAR_COLOR[r.status];
+    const bar=r.pct!==null?`<div class="prog"><div class="prog-fill" style="width:${r.pct}%;background:${bc}"></div></div>`:'';
+    const fabBadge=r.fabricableBoxes>=r.boxes?`<span class="badge b-ok">${r.fabricableBoxes.toLocaleString('es-ES')}</span>`:r.fabricableBoxes>0?`<span class="badge b-partial">${r.fabricableBoxes.toLocaleString('es-ES')}</span>`:`<span class="badge b-no">0</span>`;
+    return`<tr><td><div class="bundle-code">${r.bundle}</div></td><td><div class="boxes-num">${r.boxes.toLocaleString('es-ES')}</div></td><td>${fabBadge}</td><td>${r.weight.toFixed(1)}</td><td>${BADGES[r.status]}</td><td><div class="pct-wrap"><div class="pct-lbl">${r.pct!==null?r.pct+'%':'—'}</div>${bar}</div></td><td>${buildProdHtml(r.products,i)}</td></tr>`;
   }).join('');
 }
 
-function buildProdHtml(products, idx) {
-  const INIT = 4;
-  const total = products.length;
-  const lines = products.map(prodLine);
-  const first = lines.slice(0, INIT).join('');
-  if (total <= INIT) return `<div class="prod-list">${first}</div>`;
-  const rest = lines.slice(INIT).join('');
-  const n = total - INIT;
-  return `<div class="prod-list">${first}
-    <div class="prod-extra" id="ex-${idx}">${rest}</div>
-    <button class="btn-more" id="bm-${idx}" onclick="toggleExtra(${idx},${n})">▼ Ver ${n} producto${n!==1?'s':''} más</button>
-  </div>`;
+function buildProdHtml(products,idx){
+  const INIT=4,total=products.length;
+  const lines=products.map(prodLine);
+  const first=lines.slice(0,INIT).join('');
+  if(total<=INIT)return`<div class="prod-list">${first}</div>`;
+  const rest=lines.slice(INIT).join('');
+  const n=total-INIT;
+  return`<div class="prod-list">${first}<div class="prod-extra" id="ex-${idx}">${rest}</div><button class="btn-more" id="bm-${idx}" onclick="toggleExtra(${idx},${n})">▼ Ver ${n} producto${n!==1?'s':''} más</button></div>`;
 }
 
-function prodLine(p) {
+function prodLine(p){
   let html;
-  if (p.stock === null) { html = '<span class="c-nd">sin datos en inventario</span>'; }
-  else {
-    const need = p.needed !== null ? p.needed.toFixed(1) : '?';
-    const av   = p.stock.toFixed(1);
-    if (p.pct >= 100)     html = `<span class="c-ok">✓ necesito ${need} de ${av} disponibles</span>`;
-    else if (p.pct > 0)   html = `<span class="c-warn">⚠ necesito ${need} de ${av} disponibles</span>`;
-    else                  html = `<span class="c-no">✗ necesito ${need} — solo hay ${av} disponibles</span>`;
+  if(p.stock===null){html='<span class="c-nd">sin datos en inventario</span>';}
+  else{
+    const need=p.needed!==null?p.needed.toFixed(1):'?',av=p.stock.toFixed(1);
+    if(p.pct>=100)html=`<span class="c-ok">✓ necesito ${need} de ${av} disponibles</span>`;
+    else if(p.pct>0)html=`<span class="c-warn">⚠ necesito ${need} de ${av} disponibles</span>`;
+    else html=`<span class="c-no">✗ necesito ${need} — solo hay ${av} disponibles</span>`;
   }
-  return `<div class="prod-item"><span class="prod-code">${p.code}</span><span>${html}</span></div>`;
+  return`<div class="prod-item"><span class="prod-code">${p.code}</span><span>${html}</span></div>`;
 }
 
-function toggleExtra(idx, n) {
-  const ex = document.getElementById('ex-'+idx);
-  const bm = document.getElementById('bm-'+idx);
-  const open = ex.classList.toggle('open');
-  bm.textContent = open ? '▲ Ocultar' : '▼ Ver '+n+' producto'+(n!==1?'s':'')+' más';
+function toggleExtra(idx,n){
+  const ex=document.getElementById('ex-'+idx),bm=document.getElementById('bm-'+idx);
+  const open=ex.classList.toggle('open');
+  bm.textContent=open?'▲ Ocultar':'▼ Ver '+n+' producto'+(n!==1?'s':'')+' más';
 }
 
 // ─── BOTTLENECK ───────────────────────────────────────────────────────────────
-function renderBottleneck() {
-  // Top products blocking most boxes
-  const blockers = {};
-  analysisResults.forEach(r => {
-    if (r.status === 'ok') return;
-    r.products.forEach(p => {
-      if (p.pct !== null && p.pct < 100 && p.stock !== null) {
-        if (!blockers[p.code]) blockers[p.code] = { code:p.code, blockedBoxes:0, projects:0, stock:p.stock||0 };
-        blockers[p.code].blockedBoxes += r.boxes;
+function renderBottleneck(){
+  const blockers={};
+  analysisResults.forEach(r=>{
+    if(r.status==='ok')return;
+    r.products.forEach(p=>{
+      if(p.pct!==null&&p.pct<100&&p.stock!==null){
+        if(!blockers[p.code])blockers[p.code]={code:p.code,blockedBoxes:0,projects:0,stock:p.stock||0};
+        blockers[p.code].blockedBoxes+=r.boxes;
         blockers[p.code].projects++;
       }
     });
   });
+  const topB=Object.values(blockers).sort((a,b)=>b.blockedBoxes-a.blockedBoxes).slice(0,15);
+  const maxB=topB[0]?.blockedBoxes||1;
+  const totalBlocked=analysisResults.filter(r=>r.status!=='ok').reduce((a,r)=>a+r.boxes,0);
+  const totalFab=analysisResults.reduce((a,r)=>a+(r.fabricableBoxes||0),0);
 
-  const topBlockers = Object.values(blockers).sort((a,b) => b.blockedBoxes-a.blockedBoxes).slice(0, 15);
-  const maxBlocked = topBlockers[0]?.blockedBoxes || 1;
-
-  const totalBlocked = analysisResults.filter(r=>r.status!=='ok').reduce((a,r)=>a+r.boxes,0);
-  const totalFab = analysisResults.reduce((a,r)=>a+(r.fabricableBoxes||0),0);
-  const uniqueBlockers = Object.keys(blockers).length;
-
-  document.getElementById('bnStats').innerHTML = `
-    <div class="stat"><div class="sl">Productos cuello de botella</div><div class="sv" style="color:var(--red)">${uniqueBlockers}</div><div class="ss">artículos con stock insuficiente</div></div>
+  document.getElementById('bnStats').innerHTML=`
+    <div class="stat"><div class="sl">Productos cuello de botella</div><div class="sv" style="color:var(--red)">${Object.keys(blockers).length}</div><div class="ss">artículos insuficientes</div></div>
     <div class="stat"><div class="sl">Cajas bloqueadas</div><div class="sv" style="color:var(--amber)">${totalBlocked.toLocaleString('es-ES')}</div><div class="ss">pendientes de stock</div></div>
     <div class="stat"><div class="sl">Cajas fabricables hoy</div><div class="sv" style="color:var(--green)">${totalFab.toLocaleString('es-ES')}</div><div class="ss">con stock actual</div></div>`;
 
-  document.getElementById('bnGrid').innerHTML = `
+  document.getElementById('bnGrid').innerHTML=`
     <div class="bn-card">
       <div class="bn-card-title">🔴 Top productos que bloquean más cajas</div>
-      <div class="bn-list">${topBlockers.map(b => `
-        <div class="bn-item">
-          <div class="bn-item-left">
-            <div class="bn-code">${b.code}</div>
-            <div class="bn-sub">${b.projects} proyecto${b.projects!==1?'s':''} afectados · stock: ${b.stock.toFixed(1)} u.</div>
-          </div>
-          <div class="bn-bar-wrap">
-            <div class="bn-bar-lbl" style="color:var(--red-d)">${b.blockedBoxes.toLocaleString('es-ES')} cajas</div>
-            <div class="prog"><div class="prog-fill" style="width:${Math.round((b.blockedBoxes/maxBlocked)*100)}%;background:var(--red)"></div></div>
-          </div>
-        </div>`).join('')}
-      </div>
+      <div>${topB.map(b=>`<div class="bn-item"><div><div class="bn-code">${b.code}</div><div class="bn-sub">${b.projects} proyectos · stock: ${b.stock.toFixed(1)} u.</div></div><div class="bn-bar-wrap"><div class="bn-bar-lbl" style="color:var(--red-d)">${b.blockedBoxes.toLocaleString('es-ES')} cajas</div><div class="prog"><div class="prog-fill" style="width:${Math.round((b.blockedBoxes/maxB)*100)}%;background:var(--red)"></div></div></div></div>`).join('')}</div>
     </div>
     <div class="bn-card">
-      <div class="bn-card-title">📊 Distribución de proyectos por estado</div>
-      <div style="padding:16px">
-        ${renderDonut()}
-      </div>
+      <div class="bn-card-title">📊 Distribución por estado</div>
+      <div style="padding:16px">${[
+        {label:'Fabricables',count:analysisResults.filter(r=>r.status==='ok').length,color:'#1D9E75'},
+        {label:'Parciales',count:analysisResults.filter(r=>r.status==='partial').length,color:'#BA7517'},
+        {label:'Sin stock',count:analysisResults.filter(r=>r.status==='no').length,color:'#E24B4A'},
+        {label:'Sin datos',count:analysisResults.filter(r=>r.status==='missing').length,color:'#888780'}
+      ].map(b=>`<div style="display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center;margin-bottom:10px"><span style="font-size:12px;color:var(--text2)">${b.label}</span><div class="prog"><div class="prog-fill" style="width:${Math.round((b.count/analysisResults.length)*100)}%;background:${b.color}"></div></div><span style="font-size:12px;font-weight:600">${b.count}</span></div>`).join('')}</div>
     </div>`;
-}
-
-function renderDonut() {
-  const ok      = analysisResults.filter(r=>r.status==='ok').length;
-  const partial = analysisResults.filter(r=>r.status==='partial').length;
-  const no      = analysisResults.filter(r=>r.status==='no').length;
-  const missing = analysisResults.filter(r=>r.status==='missing').length;
-  const total   = analysisResults.length || 1;
-
-  const bars = [
-    { label:'Fabricables', count:ok, color:'#1D9E75' },
-    { label:'Parciales', count:partial, color:'#BA7517' },
-    { label:'Sin stock', count:no, color:'#E24B4A' },
-    { label:'Sin datos', count:missing, color:'#888780' }
-  ];
-
-  return bars.map(b => `
-    <div style="display:grid;grid-template-columns:120px 1fr auto;gap:10px;align-items:center;margin-bottom:10px">
-      <span style="font-size:12px;color:var(--text2)">${b.label}</span>
-      <div class="prog"><div class="prog-fill" style="width:${Math.round((b.count/total)*100)}%;background:${b.color}"></div></div>
-      <span style="font-size:12px;font-weight:600;color:var(--text);min-width:30px;text-align:right">${b.count}</span>
-    </div>`).join('');
 }
 
 // ─── PRODUCT VIEW ─────────────────────────────────────────────────────────────
-function renderProducts() {
-  const search = (document.getElementById('pvSearch').value || '').toLowerCase();
-  const sort   = document.getElementById('pvSort').value;
+function buildProductView(){
+  const map={};
+  analysisResults.forEach(r=>{
+    r.products.forEach(p=>{
+      if(!map[p.code])map[p.code]={code:p.code,stock:inventoryMap[p.code]??null,projects:[],totalNeeded:0,blockedBoxes:0};
+      map[p.code].projects.push(r.bundle);
+      if(p.needed!==null)map[p.code].totalNeeded+=p.needed;
+      if(r.status!=='ok'&&p.pct!==null&&p.pct<100)map[p.code].blockedBoxes+=r.boxes;
+    });
+  });
+  productView=Object.values(map).map(e=>{
+    const pct=e.stock!==null&&e.totalNeeded>0?Math.min(100,Math.round((e.stock/e.totalNeeded)*100)):(e.stock===null?null:100);
+    return{...e,pct};
+  });
+}
 
-  let data = productView.filter(p => !search || p.code.toLowerCase().includes(search));
-
-  data.sort((a,b) => {
-    if (sort==='blocked_desc')   return b.blockedBoxes-a.blockedBoxes;
-    if (sort==='stock_asc')      return (a.stock||0)-(b.stock||0);
-    if (sort==='projects_desc')  return b.projects.length-a.projects.length;
-    if (sort==='pct_asc')        return (a.pct??999)-(b.pct??999);
+function renderProducts(){
+  const search=(document.getElementById('pvSearch').value||'').toLowerCase();
+  const sort=document.getElementById('pvSort').value;
+  let data=productView.filter(p=>!search||p.code.toLowerCase().includes(search));
+  data.sort((a,b)=>{
+    if(sort==='blocked_desc')return b.blockedBoxes-a.blockedBoxes;
+    if(sort==='stock_asc')return(a.stock||0)-(b.stock||0);
+    if(sort==='projects_desc')return b.projects.length-a.projects.length;
+    if(sort==='pct_asc')return(a.pct??999)-(b.pct??999);
     return 0;
   });
-
-  document.getElementById('pvCount').textContent = data.length + ' productos';
-
-  document.getElementById('pvBody').innerHTML = data.map(p => {
-    const stockStr = p.stock !== null ? p.stock.toFixed(1) : '—';
-    const pctStr   = p.pct   !== null ? p.pct+'%' : '—';
-    const bar = p.pct !== null
-      ? `<div class="prog" style="width:80px;display:inline-block"><div class="prog-fill" style="width:${p.pct}%;background:${p.pct>=100?'#1D9E75':p.pct>0?'#BA7517':'#E24B4A'}"></div></div>`
-      : '';
-    const status = p.pct === null ? '<span class="badge b-missing">❓</span>'
-      : p.pct >= 100 ? '<span class="badge b-ok">✅ OK</span>'
-      : p.pct > 0    ? '<span class="badge b-partial">⚠️ Parcial</span>'
-      : '<span class="badge b-no">❌ Sin stock</span>';
-
-    const projBtn = p.projects.length > 0
-      ? `<button class="btn-exp" style="font-size:10px;padding:2px 7px" onclick="showProjectsForProduct('${p.code}')">ver ${p.projects.length}</button>`
-      : '0';
-
-    return `<tr>
-      <td><span class="prod-code" style="font-size:12px">${p.code}</span></td>
-      <td><strong>${stockStr}</strong> u.</td>
-      <td>${projBtn}</td>
-      <td>${p.blockedBoxes.toLocaleString('es-ES')}</td>
-      <td>${p.totalNeeded.toFixed(1)}</td>
-      <td>${pctStr} ${bar}</td>
-      <td>${status}</td>
-    </tr>`;
+  document.getElementById('pvCount').textContent=data.length+' productos';
+  document.getElementById('pvBody').innerHTML=data.map(p=>{
+    const stockStr=p.stock!==null?p.stock.toFixed(1):'—';
+    const pctStr=p.pct!==null?p.pct+'%':'—';
+    const bar=p.pct!==null?`<div class="prog" style="width:80px;display:inline-block;vertical-align:middle;margin-left:4px"><div class="prog-fill" style="width:${p.pct}%;background:${p.pct>=100?'#1D9E75':p.pct>0?'#BA7517':'#E24B4A'}"></div></div>`:'';
+    const status=p.pct===null?'<span class="badge b-missing">❓</span>':p.pct>=100?'<span class="badge b-ok">✅ OK</span>':p.pct>0?'<span class="badge b-partial">⚠️ Parcial</span>':'<span class="badge b-no">❌</span>';
+    const projBtn=p.projects.length>0?`<button class="btn-exp" style="font-size:10px;padding:2px 7px" onclick="showProjectsForProduct('${p.code}')">ver ${p.projects.length}</button>`:'0';
+    return`<tr><td><span class="prod-code" style="font-size:12px">${p.code}</span></td><td><strong>${stockStr}</strong> u.</td><td>${projBtn}</td><td>${p.blockedBoxes.toLocaleString('es-ES')}</td><td>${p.totalNeeded.toFixed(1)}</td><td>${pctStr}${bar}</td><td>${status}</td></tr>`;
   }).join('');
 }
 
-function showProjectsForProduct(code) {
-  const projects = analysisResults.filter(r => r.products.some(p => p.code === code));
-  document.getElementById('modalTitle').textContent = 'Proyectos con producto: ' + code;
-  document.getElementById('modalBody').innerHTML = `
-    <table style="width:100%;font-size:13px;border-collapse:collapse">
-      <thead><tr>
-        <th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Bundle Code</th>
-        <th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Cajas</th>
-        <th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Estado</th>
-        <th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Stock en este proyecto</th>
-      </tr></thead>
-      <tbody>${projects.map(r => {
-        const prod = r.products.find(p => p.code === code);
-        const stockInfo = prod?.stock === null ? '—' : prod
-          ? `necesito ${prod.needed?.toFixed(1)||'?'} / hay ${prod.stock?.toFixed(1)||'0'}`
-          : '—';
-        return `<tr>
-          <td style="padding:8px 10px;border-bottom:1px solid var(--borderl)"><span class="bundle-code">${r.bundle}</span></td>
-          <td style="padding:8px 10px;border-bottom:1px solid var(--borderl)">${r.boxes.toLocaleString('es-ES')}</td>
-          <td style="padding:8px 10px;border-bottom:1px solid var(--borderl)">${BADGES[r.status]}</td>
-          <td style="padding:8px 10px;border-bottom:1px solid var(--borderl);font-size:12px">${stockInfo}</td>
-        </tr>`;
-      }).join('')}</tbody>
-    </table>`;
+function showProjectsForProduct(code){
+  const projects=analysisResults.filter(r=>r.products.some(p=>p.code===code));
+  document.getElementById('modalTitle').textContent='Proyectos con producto: '+code;
+  document.getElementById('modalBody').innerHTML=`<table style="width:100%;font-size:13px;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Bundle Code</th><th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Cajas</th><th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Estado</th><th style="text-align:left;padding:8px 10px;background:var(--bg2);border-bottom:1px solid var(--border)">Stock en proyecto</th></tr></thead><tbody>${projects.map(r=>{const prod=r.products.find(p=>p.code===code);const si=prod?.stock===null?'—':prod?`necesito ${prod.needed?.toFixed(1)||'?'} / hay ${prod.stock?.toFixed(1)||'0'}`:'—';return`<tr><td style="padding:8px 10px;border-bottom:1px solid var(--borderl)"><span class="bundle-code">${r.bundle}</span></td><td style="padding:8px 10px;border-bottom:1px solid var(--borderl)">${r.boxes.toLocaleString('es-ES')}</td><td style="padding:8px 10px;border-bottom:1px solid var(--borderl)">${BADGES[r.status]}</td><td style="padding:8px 10px;border-bottom:1px solid var(--borderl);font-size:12px">${si}</td></tr>`;}).join('')}</tbody></table>`;
   document.getElementById('modalOverlay').classList.remove('hidden');
-}
-
-function closeModal(e) {
-  if (e.target === document.getElementById('modalOverlay')) {
-    document.getElementById('modalOverlay').classList.add('hidden');
-  }
 }
 
 // ─── BUY LIST ─────────────────────────────────────────────────────────────────
-function renderBuy() {
-  const filter = document.getElementById('buyFilter').value;
-  const sort   = document.getElementById('buySort').value;
-
-  // Rebuild buy list based on filter
-  const statuses = filter === 'partial' ? ['partial'] : filter === 'no' ? ['no'] : ['partial','no','missing'];
-  const map = {};
-  analysisResults.forEach(r => {
-    if (!statuses.includes(r.status)) return;
-    r.products.forEach(p => {
-      if (p.stock === null || p.pct === null || p.pct >= 100) return;
-      const shortage = Math.max(0, (p.needed||0) - (p.stock||0));
-      if (shortage <= 0) return;
-      if (!map[p.code]) map[p.code] = { code:p.code, stock:p.stock||0, totalNeeded:0, projects:new Set(), unlockBoxes:0 };
-      map[p.code].totalNeeded += p.needed||0;
+function buildBuyList(){
+  const map={};
+  analysisResults.forEach(r=>{
+    if(r.status==='ok')return;
+    r.products.forEach(p=>{
+      if(p.stock===null||p.pct===null||p.pct>=100)return;
+      const shortage=Math.max(0,(p.needed||0)-(p.stock||0));
+      if(shortage<=0)return;
+      if(!map[p.code])map[p.code]={code:p.code,stock:p.stock||0,totalNeeded:0,projects:new Set(),unlockBoxes:0};
+      map[p.code].totalNeeded+=p.needed||0;
       map[p.code].projects.add(r.bundle);
-      map[p.code].unlockBoxes += r.boxes;
+      map[p.code].unlockBoxes+=r.boxes;
     });
   });
-
-  let data = Object.values(map).map(e => ({ ...e, projects:[...e.projects], toOrder: Math.ceil(Math.max(0, e.totalNeeded - e.stock)) }));
-
-  data.sort((a,b) => {
-    if (sort==='qty_desc')        return b.toOrder-a.toOrder;
-    if (sort==='qty_asc')         return a.toOrder-b.toOrder;
-    if (sort==='projects_desc')   return b.projects.length-a.projects.length;
-    return 0;
-  });
-
-  const totalItems   = data.length;
-  const totalUnlock  = [...new Set(data.flatMap(d => d.projects))].length;
-
-  document.getElementById('buySummary').innerHTML = `
-    <div class="buy-chip"><strong>${totalItems}</strong>artículos a pedir</div>
-    <div class="buy-chip"><strong>${totalUnlock}</strong>proyectos desbloqueables</div>
-    <div class="buy-chip"><strong>${data.reduce((a,d)=>a+d.unlockBoxes,0).toLocaleString('es-ES')}</strong>cajas desbloqueables</div>`;
-
-  document.getElementById('buyCount').textContent = data.length + ' artículo' + (data.length!==1?'s':'');
-
-  document.getElementById('buyBody').innerHTML = data.map(d => `
-    <tr>
-      <td><span class="prod-code" style="font-size:12px">${d.code}</span></td>
-      <td>${d.stock.toFixed(1)} u.</td>
-      <td>${d.totalNeeded.toFixed(1)} u.</td>
-      <td><strong style="color:var(--red-d)">${d.toOrder.toLocaleString('es-ES')} u.</strong></td>
-      <td>
-        <button class="btn-exp" style="font-size:10px;padding:2px 7px" onclick="showBuyProjects('${d.code}','${d.projects.join(',')}')">
-          ver ${d.projects.length}
-        </button>
-      </td>
-      <td><span class="badge b-blue">${d.unlockBoxes.toLocaleString('es-ES')} cajas</span></td>
-    </tr>`).join('');
+  buyList=Object.values(map).map(e=>({...e,projects:[...e.projects],toOrder:Math.ceil(Math.max(0,e.totalNeeded-e.stock))}));
 }
 
-function showBuyProjects(code, projStr) {
-  const projects = projStr.split(',');
-  document.getElementById('modalTitle').textContent = 'Proyectos que se desbloquean comprando: ' + code;
-  document.getElementById('modalBody').innerHTML = `<div style="font-size:12px;line-height:2">
-    ${projects.map(p => `<div><span class="bundle-code">${p}</span></div>`).join('')}
-  </div>`;
+function renderBuy(){
+  const filter=document.getElementById('buyFilter').value;
+  const sort=document.getElementById('buySort').value;
+  const statuses=filter==='partial'?['partial']:filter==='no'?['no']:['partial','no','missing'];
+  const map={};
+  analysisResults.forEach(r=>{
+    if(!statuses.includes(r.status))return;
+    r.products.forEach(p=>{
+      if(p.stock===null||p.pct===null||p.pct>=100)return;
+      const shortage=Math.max(0,(p.needed||0)-(p.stock||0));
+      if(shortage<=0)return;
+      if(!map[p.code])map[p.code]={code:p.code,stock:p.stock||0,totalNeeded:0,projects:new Set(),unlockBoxes:0};
+      map[p.code].totalNeeded+=p.needed||0;
+      map[p.code].projects.add(r.bundle);
+      map[p.code].unlockBoxes+=r.boxes;
+    });
+  });
+  let data=Object.values(map).map(e=>({...e,projects:[...e.projects],toOrder:Math.ceil(Math.max(0,e.totalNeeded-e.stock))}));
+  data.sort((a,b)=>sort==='qty_asc'?a.toOrder-b.toOrder:sort==='projects_desc'?b.projects.length-a.projects.length:b.toOrder-a.toOrder);
+
+  document.getElementById('buySummary').innerHTML=`
+    <div class="buy-chip"><strong>${data.length}</strong>artículos a pedir</div>
+    <div class="buy-chip"><strong>${[...new Set(data.flatMap(d=>d.projects))].length}</strong>proyectos desbloqueables</div>
+    <div class="buy-chip"><strong>${data.reduce((a,d)=>a+d.unlockBoxes,0).toLocaleString('es-ES')}</strong>cajas desbloqueables</div>`;
+  document.getElementById('buyCount').textContent=data.length+' artículo'+(data.length!==1?'s':'');
+  document.getElementById('buyBody').innerHTML=data.map(d=>`<tr><td><span class="prod-code" style="font-size:12px">${d.code}</span></td><td>${d.stock.toFixed(1)} u.</td><td>${d.totalNeeded.toFixed(1)} u.</td><td><strong style="color:var(--red-d)">${d.toOrder.toLocaleString('es-ES')} u.</strong></td><td><button class="btn-exp" style="font-size:10px;padding:2px 7px" onclick="showBuyProjects('${d.code}','${d.projects.join(',')}')">ver ${d.projects.length}</button></td><td><span class="badge b-blue">${d.unlockBoxes.toLocaleString('es-ES')} cajas</span></td></tr>`).join('');
+}
+
+function showBuyProjects(code,projStr){
+  const projects=projStr.split(',');
+  document.getElementById('modalTitle').textContent='Proyectos que desbloquea comprar: '+code;
+  document.getElementById('modalBody').innerHTML=`<div style="columns:2;font-size:12px;line-height:2">${projects.map(p=>`<div><span class="bundle-code">${p}</span></div>`).join('')}</div>`;
   document.getElementById('modalOverlay').classList.remove('hidden');
 }
 
-// ─── HISTORY ─────────────────────────────────────────────────────────────────
-function saveSession() {
-  if (!analysisResults.length) return;
-  const sessions = getHistory();
-  const session = {
-    id: Date.now(),
-    date: new Date().toLocaleString('es-ES'),
-    results: analysisResults,
-    inventoryMap
-  };
-  sessions.unshift(session);
-  // Keep max 10
-  localStorage.setItem('priorizaenvivo_history', JSON.stringify(sessions.slice(0, 10)));
+// ─── HISTORY ──────────────────────────────────────────────────────────────────
+function saveSession(){
+  if(!analysisResults.length)return;
+  const sessions=getHistory();
+  sessions.unshift({id:Date.now(),date:new Date().toLocaleString('es-ES'),results:analysisResults,inventoryMap});
+  localStorage.setItem('priorizaenvivo_history',JSON.stringify(sessions.slice(0,10)));
   loadHistory();
-  alert('✅ Sesión guardada correctamente');
+  alert('✅ Sesión guardada');
 }
-
-function getHistory() {
-  try { return JSON.parse(localStorage.getItem('priorizaenvivo_history') || '[]'); } catch { return []; }
-}
-
-function loadHistory() {
-  const sessions = getHistory();
-  document.getElementById('tc-history').textContent = sessions.length;
-  const empty = document.getElementById('histEmpty');
-  const list  = document.getElementById('histList');
-
-  if (!sessions.length) { empty.classList.remove('hidden'); list.innerHTML=''; return; }
+function getHistory(){try{return JSON.parse(localStorage.getItem('priorizaenvivo_history')||'[]');}catch{return[];}}
+function loadHistory(){
+  const sessions=getHistory();
+  document.getElementById('tc-history').textContent=sessions.length;
+  const empty=document.getElementById('histEmpty'),list=document.getElementById('histList');
+  if(!sessions.length){empty.classList.remove('hidden');list.innerHTML='';return;}
   empty.classList.add('hidden');
-
-  list.innerHTML = sessions.map(s => {
-    const ok      = s.results.filter(r=>r.status==='ok').length;
-    const partial = s.results.filter(r=>r.status==='partial').length;
-    const no      = s.results.filter(r=>r.status==='no').length;
-    const totalBoxesOk = s.results.filter(r=>r.status==='ok').reduce((a,r)=>a+r.boxes,0);
-    return `<div class="hist-card">
-      <div style="font-size:20px">📁</div>
-      <div>
-        <div class="hist-date">${s.date}</div>
-        <div class="hist-stats" style="margin-top:4px">
-          <span class="hist-chip b-ok">${ok} fabricables</span>
-          <span class="hist-chip b-partial">${partial} parciales</span>
-          <span class="hist-chip b-no">${no} sin stock</span>
-          <span style="font-size:11px;color:var(--text2)">${totalBoxesOk.toLocaleString('es-ES')} cajas ok</span>
-        </div>
-      </div>
-      <div class="hist-actions">
-        <button class="btn-sm" onclick="loadSession(${s.id})">📂 Cargar</button>
-        <button class="btn-sm danger" onclick="deleteSession(${s.id})">✕</button>
-      </div>
-    </div>`;
+  list.innerHTML=sessions.map(s=>{
+    const ok=s.results.filter(r=>r.status==='ok').length;
+    const partial=s.results.filter(r=>r.status==='partial').length;
+    const no=s.results.filter(r=>r.status==='no').length;
+    return`<div class="hist-card"><div style="font-size:20px">📁</div><div><div class="hist-date">${s.date}</div><div class="hist-stats" style="margin-top:4px"><span class="hist-chip b-ok">${ok} fabricables</span><span class="hist-chip b-partial">${partial} parciales</span><span class="hist-chip b-no">${no} sin stock</span></div></div><div class="hist-actions"><button class="btn-sm" onclick="loadSession(${s.id})">📂 Cargar</button><button class="btn-sm danger" onclick="deleteSession(${s.id})">✕</button></div></div>`;
   }).join('');
 }
-
-function loadSession(id) {
-  const sessions = getHistory();
-  const s = sessions.find(x => x.id === id);
-  if (!s) return;
-  analysisResults = s.results;
-  inventoryMap = s.inventoryMap;
-  buildProductView();
-  buildBuyList();
-  renderStats();
-  renderResults();
-  renderBottleneck();
-  renderProducts();
-  renderBuy();
-  document.getElementById('tc-results').textContent = analysisResults.length;
-  document.getElementById('btnSave').style.display = '';
-  document.getElementById('btnXlsx').style.display = '';
-  switchTab('results');
+function loadSession(id){
+  const s=getHistory().find(x=>x.id===id);
+  if(!s)return;
+  analysisResults=s.results;inventoryMap=s.inventoryMap;
+  buildProductView();buildBuyList();renderAll();
+  document.getElementById('tc-results').textContent=analysisResults.length;
+  document.getElementById('btnSave').style.display='';
+  document.getElementById('btnXlsx').style.display='';
+  document.getElementById('globalProgress').style.display='';
+  document.getElementById('tabBar').classList.remove('no-progress');
+  switchTab('dashboard');
 }
-
-function deleteSession(id) {
-  const sessions = getHistory().filter(s => s.id !== id);
-  localStorage.setItem('priorizaenvivo_history', JSON.stringify(sessions));
+function deleteSession(id){
+  localStorage.setItem('priorizaenvivo_history',JSON.stringify(getHistory().filter(s=>s.id!==id)));
   loadHistory();
 }
-
-function clearHistory() {
-  if (!confirm('¿Borrar todo el historial?')) return;
-  localStorage.removeItem('priorizaenvivo_history');
-  loadHistory();
-}
+function clearHistory(){if(!confirm('¿Borrar todo el historial?'))return;localStorage.removeItem('priorizaenvivo_history');loadHistory();}
 
 // ─── EXPORT ───────────────────────────────────────────────────────────────────
-function exportCSV() {
-  const fs = document.getElementById('filterStatus').value;
-  const mb = parseInt(document.getElementById('minBoxes').value) || 1;
-  const data = analysisResults.filter(r => (!fs || r.status === fs) && r.boxes >= mb);
-  const statusMap = { ok:'Fabricable', partial:'Parcial', no:'Sin stock', missing:'Sin datos' };
-  const headers = ['WMS Bundle Code','Cajas plan','Cajas fabricables','Peso (kg)','Estado','% Stock'];
-  const rows = data.map(r => [r.bundle, r.boxes, r.fabricableBoxes||0, r.weight.toFixed(1), statusMap[r.status], r.pct!==null?r.pct+'%':'?']);
-  downloadCSV([headers, ...rows], 'priorizacion_' + new Date().toISOString().slice(0,10));
+function exportCSV(){
+  const fs=document.getElementById('filterStatus').value,mb=parseInt(document.getElementById('minBoxes').value)||1;
+  const data=analysisResults.filter(r=>(!fs||r.status===fs)&&r.boxes>=mb);
+  const sm={ok:'Fabricable',partial:'Parcial',no:'Sin stock',missing:'Sin datos'};
+  downloadCSV([['WMS Bundle Code','Cajas plan','Cajas fabricables','Peso (kg)','Estado','% Stock'],...data.map(r=>[r.bundle,r.boxes,r.fabricableBoxes||0,r.weight.toFixed(1),sm[r.status],r.pct!==null?r.pct+'%':'?'])],'priorizacion_'+new Date().toISOString().slice(0,10));
+}
+function exportBuyCSV(){
+  downloadCSV([['Código','Stock actual','Total necesario','Cantidad a pedir','Proyectos','Cajas desbloqueables'],...buyList.map(d=>[d.code,d.stock.toFixed(1),d.totalNeeded.toFixed(1),d.toOrder,d.projects.length,d.unlockBoxes])],'lista_compra_'+new Date().toISOString().slice(0,10));
+}
+function exportXLSX(){
+  const wb=XLSX.utils.book_new();
+  const sm={ok:'Fabricable',partial:'Parcial',no:'Sin stock',missing:'Sin datos'};
+  const proj=[['WMS Bundle Code','Cajas plan','Cajas fabricables','Peso (kg)','Estado','% Stock'],...analysisResults.map(r=>[r.bundle,r.boxes,r.fabricableBoxes||0,r.weight.toFixed(1),sm[r.status],r.pct!==null?r.pct+'%':'?'])];
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(proj),'Proyectos');
+  ['ok','partial','no'].forEach(s=>{
+    const name={ok:'Fabricables',partial:'Parciales',no:'Sin stock'}[s];
+    const rows=[['WMS Bundle Code','Cajas plan','Cajas fabricables','Peso (kg)'],...analysisResults.filter(r=>r.status===s).map(r=>[r.bundle,r.boxes,r.fabricableBoxes||0,r.weight.toFixed(1)])];
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(rows),name);
+  });
+  const buy=[['Código','Stock actual','Total necesario','Cantidad a pedir','Proyectos','Cajas desbloqueables'],...buyList.map(d=>[d.code,d.stock.toFixed(1),d.totalNeeded.toFixed(1),d.toOrder,d.projects.length,d.unlockBoxes])];
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(buy),'Lista compra');
+  XLSX.writeFile(wb,'priorizaenvivo_'+new Date().toISOString().slice(0,10)+'.xlsx');
+}
+function downloadCSV(rows,filename){
+  const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=filename+'.csv';a.click();URL.revokeObjectURL(url);
 }
 
-function exportBuyCSV() {
-  const headers = ['Código producto','Stock actual','Total necesario','Cantidad a pedir','Proyectos que desbloquea','Cajas desbloqueables'];
-  const rows = buyList.map(d => [d.code, d.stock.toFixed(1), d.totalNeeded.toFixed(1), d.toOrder, d.projects.length, d.unlockBoxes]);
-  downloadCSV([headers, ...rows], 'lista_compra_' + new Date().toISOString().slice(0,10));
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+function showModal(title,products){
+  document.getElementById('modalTitle').textContent=title;
+  document.getElementById('modalBody').innerHTML=`<div class="prod-list" style="font-size:12px">${products.map(prodLine).join('')}</div>`;
+  document.getElementById('modalOverlay').classList.remove('hidden');
 }
-
-function exportXLSX() {
-  const wb = XLSX.utils.book_new();
-
-  // Sheet 1: Proyectos
-  const proj = [['WMS Bundle Code','Cajas plan','Cajas fabricables','Peso (kg)','Estado','% Stock']];
-  const statusMap = { ok:'Fabricable', partial:'Parcial', no:'Sin stock', missing:'Sin datos' };
-  analysisResults.forEach(r => proj.push([r.bundle, r.boxes, r.fabricableBoxes||0, r.weight.toFixed(1), statusMap[r.status], r.pct!==null?r.pct+'%':'?']));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(proj), 'Proyectos');
-
-  // Sheet 2: Fabricables
-  const fab = [['WMS Bundle Code','Cajas','Peso (kg)']];
-  analysisResults.filter(r=>r.status==='ok').forEach(r => fab.push([r.bundle, r.boxes, r.weight.toFixed(1)]));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(fab), 'Fabricables');
-
-  // Sheet 3: Parciales
-  const par = [['WMS Bundle Code','Cajas plan','Cajas fabricables','% Stock']];
-  analysisResults.filter(r=>r.status==='partial').forEach(r => par.push([r.bundle, r.boxes, r.fabricableBoxes||0, r.pct+'%']));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(par), 'Parciales');
-
-  // Sheet 4: Bloqueados
-  const blo = [['WMS Bundle Code','Cajas','Peso (kg)']];
-  analysisResults.filter(r=>r.status==='no').forEach(r => blo.push([r.bundle, r.boxes, r.weight.toFixed(1)]));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(blo), 'Sin stock');
-
-  // Sheet 5: Lista compra
-  const buy = [['Código','Stock actual','Total necesario','Cantidad a pedir','Proyectos','Cajas desbloqueables']];
-  buyList.forEach(d => buy.push([d.code, d.stock.toFixed(1), d.totalNeeded.toFixed(1), d.toOrder, d.projects.length, d.unlockBoxes]));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(buy), 'Lista compra');
-
-  XLSX.writeFile(wb, 'priorizaenvivo_' + new Date().toISOString().slice(0,10) + '.xlsx');
-}
-
-function downloadCSV(rows, filename) {
-  const csv = rows.map(r => r.map(c => '"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
-  const blob = new Blob(['\uFEFF'+csv], { type:'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename+'.csv'; a.click();
-  URL.revokeObjectURL(url);
-}
+function closeModalOv(e){if(e.target===document.getElementById('modalOverlay'))document.getElementById('modalOverlay').classList.add('hidden');}
 
 // ─── TABS ─────────────────────────────────────────────────────────────────────
-function switchTab(name) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+function switchTab(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
 }
+function switchTabFiltered(tab,status){
+  document.getElementById('filterStatus').value=status;
+  renderResults();
+  switchTab(tab);
+}
 
-// Init history on load
-window.addEventListener('DOMContentLoaded', loadHistory);
+window.addEventListener('DOMContentLoaded',loadHistory);
 </script>
 </body>
 </html>
